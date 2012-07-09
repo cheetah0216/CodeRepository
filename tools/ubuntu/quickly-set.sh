@@ -9,7 +9,13 @@ sudo apt-get install nautilus-gksu
 sudo apt-get install rar
 sudo apt-get install p7zip
 
+#多系统时更新启动项
+apt-get install grub2
+sudo update-grub
+
 #重启图形界面
 sudo service gdm restart
+
+
 
 

@@ -9,6 +9,9 @@ sudo apt-get install nautilus-gksu
 sudo apt-get install rar
 sudo apt-get install p7zip
 
+#Python
+apt-get install python3.1
+
 #多系统时更新启动项
 apt-get install grub2
 sudo update-grub

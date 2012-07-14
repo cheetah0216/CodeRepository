@@ -1,0 +1,9 @@
+*************************************************************
+	Individuals to improve the efficiency of tools
+*************************************************************
+Directory information:
+ubuntu--------->
+	quickly-set.sh :Quick configure the system installed.(Ubuntu10.10)
+	setfont.sh     :Quickly set up the fonts I like.
+
+AutoHosts.py  :Automatically update the hosts on linux or windows.

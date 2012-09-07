@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DirVim=/root/.vim
+
+Vimrc=/root/.vimrc
+RootBashrc=/root/.bashrc
+HomeBashrc=/home/liufei/.bashrc
+GitConf=/root/.gitconfig
+GitIgnore=/root/.gitignore
+Env=/home/liufei/.env
+FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
+
+DirEtc=/home/liufei/github/CodeRepository/tools/etc
+
+if [ -d "$DirVim" ]; then
+	cp -R "$DirVim" "$DirEtc"
+fi
+
+if [ -f "$RootBashrc" ]; then
+	cp "$RootBashrc" "$DirEtc""/.bashrc-root"
+fi
+
+if [ -f "$HomeBashrc" ]; then
+	cp "$HomeBashrc" "$DirEtc""/.bashrc-home"
+fi
+
+for FileName in ${FileNameArr[@]}
+do
+	cp "$FileName" "$DirEtc"
+done

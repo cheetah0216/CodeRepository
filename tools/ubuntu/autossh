@@ -1,0 +1,4 @@
+#!/bin/bash
+gnome-terminal<< EOF
+ssh -l gsong 10.8.32.172
+EOF

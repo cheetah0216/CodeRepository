@@ -1,0 +1,43 @@
+# Object files
+*.o
+
+# Libraries
+*.lib
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+
+# Executables
+*.exe
+*.out
+
+# Packages 
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases 
+*.log
+*.sql
+*.sqlite
+
+# Vim tmp
+*~
+*.swp
+
+# WorkSpace
+*.files
+*.out
+*.vim
+*.viminfo
+tags
+filenametags
+
+# LF
+*.lf

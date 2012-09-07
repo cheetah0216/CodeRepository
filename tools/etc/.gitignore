@@ -34,8 +34,8 @@
 # WorkSpace
 *.files
 *.out
-*.vim
-*.viminfo
+session.vim
+session.viminfo
 tags
 filenametags
 

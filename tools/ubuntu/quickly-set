@@ -32,6 +32,10 @@ sudo apt-get -y install subversion
 sudo apt-get -y install automake
 sudo apt-get -y install libtool
 
+#mysql
+sudo apt-get -y install libmysqlclient-dev 
+sudo apt-get -y intsall libmysqlclient
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

@@ -6,6 +6,7 @@ sudo apt-get -y install nautilus-open-terminal
 #右键中添加"以管理员身份打开"，需重启图形界面
 sudo apt-get -y install nautilus-gksu
 
+sudo apt-get -y install catfish
 #rar，7z支持
 sudo apt-get -y install rar
 sudo apt-get -y install p7zip
@@ -34,7 +35,7 @@ sudo apt-get -y install libtool
 
 #mysql
 sudo apt-get -y install libmysqlclient-dev 
-sudo apt-get -y intsall libmysqlclient
+sudo apt-get -y install libmysqlclient
 
 #多系统时更新启动项
 #ubuntun10.10

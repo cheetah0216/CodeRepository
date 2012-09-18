@@ -28,9 +28,8 @@ function git-push() {
         local str=$(expect -c "
             spawn git push
             expect {
-                sleep 1
-                Username for * { send "cheetah0216\r"; exp_continue }
-                Password for * { send "feifeil0217\r"; }
+                -re "sername" { send "cheetah0216\r"; exp_continue }
+                -re "asspord" { send "feifeil0217\r"; }
               }
             exit   
         ")

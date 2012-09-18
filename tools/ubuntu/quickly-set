@@ -37,6 +37,13 @@ sudo apt-get -y install libtool
 sudo apt-get -y install libmysqlclient-dev 
 sudo apt-get -y install libmysqlclient
 
+#weibo
+sudo apt-get -y install libcurl4-gnutls-dev
+sudo apt-get -y install libcurl4-nss-dev
+sudo apt-get -y install libcurl4-openssl-dev
+sudo apt-get -y install libcppunit-dev
+sudo apt-get -y install libcppunit-doc
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

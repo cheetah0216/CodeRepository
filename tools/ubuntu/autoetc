@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "***********************************autoetc***********************************" >> /root/.lflog
 DirVim=/root/.vim
 
 Vimrc=/root/.vimrc
@@ -11,6 +12,33 @@ Env=/home/liufei/.env
 FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
 
 DirEtc=/home/liufei/github/CodeRepository/tools/etc
+
+Hostname=`hostname`
+
+function git-push() {
+    cd $CODE
+    echo `date` >> /root/.lflog
+    echo "$Hostname: $CODE git-push." >> /root/.lflog
+    git add .
+    git status >> /root/.lflog
+    echo "`date`: autoetc-->commit" >> /root/.lflog
+    git commit -m "`date`: autoetc."
+    echo "`date`: autoetc-->push" >> /root/.lflog
+    if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
+        local str=$(expect -c "
+            spawn git push
+            expect ":"
+            send "cheetah0216\r"
+            expect ":"
+            send "feifeil0217\r"
+            expect "#"
+            interact   
+        ")
+        echo "$str" >> /root/.lflog
+    fi
+}
+git-push
+exit
 
 if [ -d "$DirVim" ]; then
 	cp -R "$DirVim" "$DirEtc"

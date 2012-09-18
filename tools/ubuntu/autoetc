@@ -29,8 +29,9 @@ function git-push() {
             spawn git push
             expect {
                 "Username for 'https://github.com':" { send "cheetah0216\r"; exp_continue }
-
-            interact   
+                "Password for 'https://cheetah0216@github.com':" { send "feifeil0217\r"; }
+              }
+            exit   
         ")
         echo "$str" >> /root/.lflog
     fi

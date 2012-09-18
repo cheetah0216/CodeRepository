@@ -27,9 +27,9 @@ function git-push() {
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
             spawn git push
-            expect ":"
+            expect "Username:"
             send "cheetah0216\r"
-            expect ":"
+            expect "Password:"
             send "feifeil0217\r"
             expect "#"
             interact   

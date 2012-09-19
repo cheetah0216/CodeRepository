@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "$#"
+    for  v in $* 
+    do
+      #v="echo "'$'"${i}"
+      echo $v
+      
+    done    
+    exit
+
+function get_option() {
+    for (( i = 2; i <= $#; i++))
+    do
+        echo "$i"
+    done    
+}
+
+get_option

@@ -35,7 +35,7 @@ function git-push() {
                 -re "assword" { send \"$Password\r\"; }
               }
             timeout {
-                puts \"\ngit-push-error:timeout!\n\"; eixt
+                puts \"\ngit-push-error!\n\"; eixt
             }
             eof { 
                 puts \"\ngit-push-successed!\n\"; exit; 

@@ -14,6 +14,7 @@ FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
 DirEtc=/home/liufei/github/CodeRepository/tools/etc
 
 Hostname=`hostname`
+Username="cheetah0216"
 
 function git-push() {
     cd $CODE
@@ -26,11 +27,9 @@ function git-push() {
     echo "`date`: autoetc-->push" >> /root/.lflog
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
-            set Username [lindex $argv 0]
-            set Password "cheetah"
             spawn git push
             expect -re "sername"
-            send \"$Username\r\"
+            send \"$1\r\"
             expect -re "assword"
             send \"$1\r\"
         ")

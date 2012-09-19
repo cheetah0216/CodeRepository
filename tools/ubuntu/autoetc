@@ -27,14 +27,11 @@ function git-push() {
     echo "`date`: autoetc-->push" >> /root/.lflog
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
-            set timeout 60 
             spawn git push
-            expect {
-                -re "sername" { send \"$Username\r\"; exp_continue }
-                puts "$1\r"
-                -re "assword" { send \"$1\r\"; }
-              }
-              interact
+            expect -re "sername"
+            send \"Username\r\"
+            expect -re "assword"
+            send \"$1\r\"
         ")
         echo "$str" >> /root/.lflog
     fi
@@ -42,6 +39,11 @@ function git-push() {
 git-push
 exit
 
+            expect {
+                -re "sername" { send \"$Username\r\"; exp_continue }
+                -re "assword" { send \"$1\r\"; }
+              }
+              interact
                 eof { puts "\\ngit-push-successed!\\n"exit; }
 if [ -d "$DirVim" ]; then
 	cp -R "$DirVim" "$DirEtc"

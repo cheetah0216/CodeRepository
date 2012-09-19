@@ -29,10 +29,11 @@ function git-push() {
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
             spawn git push
-            expect -re "sername"
-            send \"$Password\r\"
-            expect -re "assword"
-            send \"$Password\r\"
+            expect {
+                -re "sername" { send \"$Username\r\"; exp_continue }
+                -re "assword" { send \"$Password\r\"; }
+              }
+              interact
         ")
         echo "$str" >> /root/.lflog
     fi
@@ -40,11 +41,6 @@ function git-push() {
 git-push
 exit
 
-            expect {
-                -re "sername" { send \"$Username\r\"; exp_continue }
-                -re "assword" { send \"$1\r\"; }
-              }
-              interact
                 eof { puts "\\ngit-push-successed!\\n"exit; }
 if [ -d "$DirVim" ]; then
 	cp -R "$DirVim" "$DirEtc"

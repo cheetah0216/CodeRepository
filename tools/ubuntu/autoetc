@@ -14,7 +14,6 @@ FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
 DirEtc=/home/liufei/github/CodeRepository/tools/etc
 
 Hostname=`hostname`
-Username="cheetah0216"
 
 function git-push() {
     cd $CODE

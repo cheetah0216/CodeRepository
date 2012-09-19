@@ -30,7 +30,7 @@ function git-push() {
             expect {
                 -re "sername" { send "cheetah0216\\r"; exp_continue }
                 -re "assword" { send "$1\\r"; }
-                sleep 10
+                sleep 11
               }
               exit
         ")

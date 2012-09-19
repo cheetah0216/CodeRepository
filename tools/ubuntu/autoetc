@@ -31,7 +31,7 @@ function git-push() {
             expect {
                 -re "sername" { send "cheetah02\r"; exp_continue }
                 -re "asspord" { send "$1\r"; }
-                timeout { send_error "git push timeout!"; exit; }
+                timeout {  puts "eout!"; exit; }
                 eof { exit; }
               }
         ")

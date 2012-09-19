@@ -15,6 +15,7 @@ DirEtc=/home/liufei/github/CodeRepository/tools/etc
 
 Hostname=`hostname`
 Username="cheetah0216"
+Password="$1"
 
 function git-push() {
     cd $CODE
@@ -29,9 +30,9 @@ function git-push() {
         local str=$(expect -c "
             spawn git push
             expect -re "sername"
-            send \"$Username\r\"
+            send \"$Password\r\"
             expect -re "assword"
-            send \"$1\r\"
+            send \"$Password\r\"
         ")
         echo "$str" >> /root/.lflog
     fi

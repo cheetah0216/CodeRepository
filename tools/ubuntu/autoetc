@@ -31,8 +31,8 @@ function git-push() {
             expect {
                 -re "sername" { send "cheetah02\r"; exp_continue }
                 -re "asspord" { send "$1\r"; }
-                timeout {  puts "\ntimeout!\n"; exit; }
-                eof { puts "\nSuccessed!\n"exit; }
+                timeout {  puts "\\ntimeout!\\n"; exit; }
+                eof { puts "\\nSuccessed!\\n"exit; }
               }
         ")
         echo "$str" >> /root/.lflog

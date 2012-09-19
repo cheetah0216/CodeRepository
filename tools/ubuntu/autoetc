@@ -31,7 +31,7 @@ function git-push() {
             set Password cheetah0216
             spawn git push
             expect -re "sername"
-            send \"Username\r\"
+            send \"$Username\r\"
             expect -re "assword"
             send \"$1\r\"
         ")

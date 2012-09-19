@@ -29,9 +29,7 @@ function git-push() {
             spawn git push
             expect {
                 -re "sername" { send "cheetah0216\\r"; exp_continue }
-                sleep 10
-                -re "asspord" { send "$1\\rr"; }
-                sleep 10
+                -re "assword" { send "$1\\rr"; }
               }
               exit
         ")

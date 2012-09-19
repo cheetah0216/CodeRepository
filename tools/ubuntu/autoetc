@@ -32,7 +32,7 @@ function git-push() {
                 -re "sername" { send "cheetah0216\r"; exp_continue }
                 -re "asspord" { send "$1\r"; }
                 timeout {  puts "\\ngit-push-error:timeout!\\n"; exit; }
-                eof { puts "\\ngit-push-Successed!\\n"exit; }
+                eof { puts "\\ngit-push-successed!\\n"exit; }
               }
         ")
         echo "$str" >> /root/.lflog

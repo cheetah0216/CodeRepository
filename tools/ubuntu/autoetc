@@ -35,10 +35,10 @@ function git-push() {
                 -re "assword" { send \"$Password\r\"; }
               }
             timeout {
-                puts "\\ngit-push-error:timeout!"; eixt
+                puts \"\ngit-push-error:timeout!\n\"; eixt
             }
             eof { 
-                puts "\\ngit-push-successed!\\n"; exit; 
+                puts \"\ngit-push-successed!\n\"; exit; 
               }
         ")
         echo "$str" >> /root/.lflog

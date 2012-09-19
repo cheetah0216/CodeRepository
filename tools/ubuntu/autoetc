@@ -29,7 +29,7 @@ function git-push() {
             set timeout 5
             spawn git push
             expect {
-                -re "sername" { send "cheetah02\r"; exp_continue }
+                -re "sername" { send "cheetah0216\r"; exp_continue }
                 -re "asspord" { send "$1\r"; }
                 timeout {  puts "\\ngit-push-error:timeout!\\n"; exit; }
                 eof { puts "\\ngit-push-Successed!\\n"exit; }

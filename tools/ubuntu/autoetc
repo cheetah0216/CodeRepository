@@ -11,7 +11,7 @@ GitIgnore=/root/.gitignore
 Env=/home/liufei/.env
 FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
 
-DirEtc=/home/liufei/github/CodeRepository/tools/etc
+DirEtc=$ETC
 
 Hostname=`hostname`
 Username="cheetah0216"

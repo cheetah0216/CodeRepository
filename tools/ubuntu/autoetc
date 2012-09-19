@@ -26,7 +26,7 @@ function git-push() {
     echo "`date`: autoetc-->push" >> /root/.lflog
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
-            set Username [lindex $argv 1]
+            set Username [lindex $argv 0]
             set Password "cheetah"
             spawn git push
             expect -re "sername"

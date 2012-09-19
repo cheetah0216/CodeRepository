@@ -39,6 +39,7 @@ function git-push() {
                 eof { 
                     puts \"\ngit-push-successed!\n\"; exit 
                 }
+                interact
           }
         ")
         echo "$str" >> /root/.lflog

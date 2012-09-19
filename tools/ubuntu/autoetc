@@ -32,14 +32,8 @@ function git-push() {
             expect {
                 -re "sername" { send \"$Username\r\"; exp_continue }
                 -re "assword" { send \"$Password\r\"; }
-                timeout {
-                    puts \"\ngit-push-error:error!\n\"; exit
-                }
-                eof { 
-                    puts \"\ngit-push-successed!\n\"; exit 
-                }
           }
-                interact
+            interact
         ")
         echo "$str" >> /root/.lflog
     fi

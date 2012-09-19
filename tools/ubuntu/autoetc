@@ -29,6 +29,7 @@ function git-push() {
             set timeout 60
             spawn git push
             expect {
+                sleep 10
                 -re "sername" { send "cheetah0216\\r"; exp_continue }
                 sleep 10
                 -re "assword" { send "$1\\r"; }

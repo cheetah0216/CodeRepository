@@ -36,6 +36,7 @@
 *.out
 session.vim
 session.viminfo
+workspace.vim
 tags
 filenametags
 

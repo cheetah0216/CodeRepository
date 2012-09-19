@@ -47,8 +47,26 @@ endif
 syntax enable
 syntax on
 colorscheme desert
-
-set nu
+set nu    "显示行号
+set ru    "打开状态栏标尺
+set hls   "高亮查找文本
+set sw=2  "自动缩进的时候,缩进尺寸为 4 个空格。
+set ts=4  "Tab 宽度为 4 个字符。
+set et    "编辑时将所有Tab替换为空格。 
+set sm    "显示括号配对情况。
+set cin   "打开 C/C++ 风格的自动缩进。
+set mousemodel=popup "当右键单击窗口的时候， 弹出快捷菜单。
+set whichwrap=h,b,s,<,>,l "自动折向下一行
+"set nowrap           "指定不折行。
+"set guioptions+=b    "添加水平滚动条
+"if (has("gui_running"))
+"    set nowrap
+"    set guioptions+=b
+"    colo torte
+"else
+"    set wrap
+"    colo ron
+"endif
 
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
@@ -165,5 +183,9 @@ vmap <silent> <leader>hl <Plug>MarkSet
 nmap <silent> <leader>hh <Plug>MarkClear
 vmap <silent> <leader>hh <Plug>MarkClear
 nmap <silent> <leader>hr <Plug>MarkRegex
-vmap <silent> <leader>hr <Plug>MarkRegex 
+vmap <silent> <leader>hr <Plug>MarkRegex
 
+""""""""""""""""""""""""""""""
+" markdown
+""""""""""""""""""""""""""""""
+"au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown

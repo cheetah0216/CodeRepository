@@ -17,6 +17,25 @@ Hostname=`hostname`
 Username="cheetah0216"
 Password="$1"
 
+function etc-bak() {
+    if [ -d "$DirVim" ]; then
+        cp -R "$DirVim" "$DirEtc"
+    fi
+
+    if [ -f "$RootBashrc" ]; then
+        cp "$RootBashrc" "$DirEtc""/.bashrc-root"
+    fi
+
+    if [ -f "$HomeBashrc" ]; then
+        cp "$HomeBashrc" "$DirEtc""/.bashrc-home"
+    fi
+
+    for FileName in ${FileNameArr[@]}
+    do
+        cp "$FileName" "$DirEtc"
+    done
+}
+
 function git-push() {
     cd $CODE
     echo `date` >> /root/.lflog
@@ -38,22 +57,6 @@ function git-push() {
         echo "$str" >> /root/.lflog
     fi
 }
+etc-bak
 git-push
-exit
 
-if [ -d "$DirVim" ]; then
-	cp -R "$DirVim" "$DirEtc"
-fi
-
-if [ -f "$RootBashrc" ]; then
-	cp "$RootBashrc" "$DirEtc""/.bashrc-root"
-fi
-
-if [ -f "$HomeBashrc" ]; then
-	cp "$HomeBashrc" "$DirEtc""/.bashrc-home"
-fi
-
-for FileName in ${FileNameArr[@]}
-do
-	cp "$FileName" "$DirEtc"
-done

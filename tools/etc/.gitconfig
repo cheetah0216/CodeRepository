@@ -2,6 +2,6 @@
 	name = liufei
 	email = flying0216@gmail.com
 [credential]
-	helper = cache --timeout=3600
+	helper = cache --timeout=0
 [core]
 	excludesfile = /root/.gitignore

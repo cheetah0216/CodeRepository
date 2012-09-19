@@ -28,7 +28,7 @@ function git-push() {
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
             set Username [lindex $argv 1]
-            set Password cheetah0216
+            set Password "cheetah"
             spawn git push
             expect -re "sername"
             send \"$Username\r\"

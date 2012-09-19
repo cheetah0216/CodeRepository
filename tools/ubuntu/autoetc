@@ -29,8 +29,8 @@ function git-push() {
             set timeout 60 
             spawn git push
             expect {
-                -re "sername" { send "cheetah0216/r"; exp_continue }
-                -re "assword" { send "$1/r" }
+                -re "sername" { send "cheetah0216\\r"; exp_continue }
+                -re "assword" { send "$1" }
               }
               interact
         ")

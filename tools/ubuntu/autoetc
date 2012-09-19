@@ -26,13 +26,13 @@ function git-push() {
     echo "`date`: autoetc-->push" >> /root/.lflog
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
-            set timeout 5
+            set timeout 10 
             spawn git push
             expect {
                 -re "sername" { send "cheetah02\r"; exp_continue }
                 -re "asspord" { send "$1\r"; }
-                timeout {  puts "\ntimeout!"; exit; }
-                eof { exit; }
+                timeout {  puts "\ntimeout!\n"; exit; }
+                eof { puts "\nSuccessed!\n"exit; }
               }
         ")
         echo "$str" >> /root/.lflog

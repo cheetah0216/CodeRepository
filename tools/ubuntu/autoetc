@@ -29,7 +29,7 @@ function git-push() {
     if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
         local str=$(expect -c "
             spawn git push
-            set timeout 60
+            set timeout -1
             expect {
                 -re "sername" { send \"$Username\r\"; exp_continue }
                 -re "assword" { send \"$Password\r\"; }

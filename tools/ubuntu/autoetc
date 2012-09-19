@@ -32,7 +32,6 @@ function git-push() {
                 -re "sername" { send "cheetah0216\\r"; exp_continue }
                 -re "assword" { send "$1\\r"; }
                 timeout {  puts "\\ngit-push-error:timeout!\\n"; exit; }
-                eof { puts "\\ngit-push-successed!\\n"exit; }
               }
         ")
         echo "$str" >> /root/.lflog
@@ -41,6 +40,7 @@ function git-push() {
 git-push
 exit
 
+                eof { puts "\\ngit-push-successed!\\n"exit; }
 if [ -d "$DirVim" ]; then
 	cp -R "$DirVim" "$DirEtc"
 fi

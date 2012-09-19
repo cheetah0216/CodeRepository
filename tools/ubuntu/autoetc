@@ -29,7 +29,7 @@ function git-push() {
         local str=$(expect -c "
             spawn git push
             expect -re "sername"
-            send \"$1\r\"
+            send \"$Username\r\"
             expect -re "assword"
             send \"$1\r\"
         ")

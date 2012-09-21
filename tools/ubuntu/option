@@ -1,19 +1,115 @@
 #!/bin/bash
+str_option="$*"
+arr_option=(${str_option//  / })
 
-echo "$#"
-    for  v in $* 
-    do
-      #v="echo "'$'"${i}"
-      echo $v
-      
-    done    
-    exit
+str_short_option=""
+str_long_option=""
+arr_short_option=(${str_short_option//  / })
+arr_long_option=(${str_long_option//  / })
 
-function get_option() {
-    for (( i = 2; i <= $#; i++))
-    do
-        echo "$i"
-    done    
+function check_str_option() {
+    echo "check option."
 }
 
-get_option
+function analyze_str_option() {
+    echo "analyze str option"
+    local i
+    for (( i=2; i<${#arr_option[@]}; i++)) do
+        local str=${arr_option[$i]}
+        local arr=(${str//:/ })
+        str_short_option=$str_short_option"${arr[0]}"":"
+        str_long_option=$str_long_option"${arr[1]}"":"
+    done    
+    #echo "$str_short_option"
+    #echo "$str_long_option"
+    arr_short_option=(${str_short_option//:/ })
+    arr_long_option=(${str_long_option//:/ })
+    #local var
+    #for var in ${arr_long_option[@]} 
+    #do 
+    #    echo $var 
+    #done 
+}
+
+function create_option_file {
+    echo "create_option_file"
+    analyze_str_option
+    #check filename
+    #add...
+    local filename=${arr_option[1]}
+    touch $filename 
+    echo "#!/bin/bash" >> $filename
+    echo "" >> $filename
+    echo "str_short_option=\"$str_short_option\"" >> $filename 
+    echo "arr_short_option=(\${str_short_option//:/ })"  >> $filename 
+    echo "str_long_option=\"$str_long_option\""  >> $filename 
+    echo "arr_long_option=(\${str_long_option//:/ })"  >> $filename 
+    local i
+    local temp
+    for (( i=0; i<${#arr_short_option[@]}; i++ )) do
+        temp=$temp"0:"
+    done
+    echo "str_flag_option=\"$temp\""  >> $filename 
+    echo "arr_flag_option=(\${str_flag_option//:/ })"  >> $filename 
+    echo ""  >> $filename 
+
+    echo "str_option=\"\$*\""  >> $filename 
+    echo "arr_option=(\${str_option//  / })"  >> $filename 
+    echo ""  >> $filename 
+    local str
+    for str in ${arr_long_option[@]}
+    do
+        temp=$filename"_"$str
+        echo "function $temp () {"  >> $filename 
+        echo "    echo \"$temp is running\""  >> $filename 
+        echo "}"  >> $filename 
+        echo ""  >> $filename 
+    done
+
+    echo "function main() {"  >> $filename 
+    echo "    case \"\${arr_option[\$1]}\" in"  >> $filename 
+    
+    for (( i=0; i<${#arr_short_option[@]}; i++ )) do
+        temp="-"${arr_short_option[i]}")"" "$filename"_"${arr_long_option[i]}
+        echo "        $temp"  >> $filename 
+        echo "            ;;"  >> $filename 
+    done
+    echo "         *)  echo \"Invalid option\""  >> $filename 
+    echo "            ;;"  >> $filename 
+    echo "    esac"  >> $filename 
+    echo ""  >> $filename 
+    echo "}"  >> $filename 
+
+    echo "main" >> $filename
+}
+
+function add_option_file {
+    echo "add option_file"
+}
+
+function del_option_file {
+    echo "del_option_file"
+}
+
+function modify_option_file {
+    echo "modify_option_file"
+}
+
+function main() {
+    check_str_option
+    case "${arr_option[$1]}" in
+        -c) create_option_file
+            ;;
+        -a) add_option_file
+            ;;
+        -d) del_option_file
+            ;;
+        -m) modify_option_file
+            ;;
+        *)  echo "Invalid option"
+            ;;
+    esac
+    chmod 777 ${arr_option[1]}
+}
+
+main 

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+str_short_option="c:a:d:m:"
+arr_short_option=(${str_short_option//:/ })
+str_long_option="create:add:del:modify:"
+arr_long_option=(${str_long_option//:/ })
+str_flag_option="0:0:0:0:"
+arr_flag_option=(${str_flag_option//:/ })
+
+str_option="$*"
+arr_option=(${str_option//  / })
+
+function case1_create () {
+    echo "case1_create is running"
+}
+
+function case1_add () {
+    echo "case1_add is running"
+}
+
+function case1_del () {
+    echo "case1_del is running"
+}
+
+function case1_modify () {
+    echo "case1_modify is running"
+}
+
+function main() {
+    case "${arr_option[$1]}" in
+        -c) case1_create
+            ;;
+        -a) case1_add
+            ;;
+        -d) case1_del
+            ;;
+        -m) case1_modify
+            ;;
+         *)  echo "Invalid option"
+            ;;
+    esac
+
+}
+main

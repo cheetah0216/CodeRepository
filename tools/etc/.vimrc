@@ -189,3 +189,8 @@ vmap <silent> <leader>hr <Plug>MarkRegex
 " markdown
 """"""""""""""""""""""""""""""
 "au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown
+
+""""""""""""""""""""""""""""""
+"snipmate
+""""""""""""""""""""""""""""""
+"let g:snips_trigger_key='<F6>' 

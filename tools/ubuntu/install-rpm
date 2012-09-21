@@ -9,3 +9,4 @@ sudo alien -i $RPMName
 sudo alien $RPMName
 sudo dpkg -i $DEBName
 
+

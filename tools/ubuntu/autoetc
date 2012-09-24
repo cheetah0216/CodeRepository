@@ -39,6 +39,8 @@ function etc-bak() {
 function git-push() {
     cd $CODE
     echo `date` >> /root/.lflog
+    echo "$Hostname: $CODE git-pull." >> /root/.lflog
+    git pull >> /root/.lflog
     echo "$Hostname: $CODE git-push." >> /root/.lflog
     git add .
     git status >> /root/.lflog

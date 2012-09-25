@@ -68,11 +68,11 @@ set whichwrap=h,b,s,<,>,l "自动折向下一行
 "    colo ron
 "endif
 
-set fileencodings=utf-8,gb2312,gbk,gb18030
-set termencoding=utf-8
-set encoding=prc
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
+"set fileencodings=utf-8,gb2312,gbk,gb18030
+"set termencoding=utf-8
+"set encoding=prc
+"source $VIMRUNTIME/delmenu.vim
+"source $VIMRUNTIME/menu.vim
 
 
 :let g:vimim_map='c-bslash'	" Ctrl-\ 开关输入法
@@ -193,4 +193,5 @@ vmap <silent> <leader>hr <Plug>MarkRegex
 """"""""""""""""""""""""""""""
 "snipmate
 """"""""""""""""""""""""""""""
-"let g:snips_trigger_key='<F6>' 
+"let g:snips_trigger_key='<F6>'
+

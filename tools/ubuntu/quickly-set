@@ -46,6 +46,9 @@ sudo apt-get -y install libcppunit-doc
 
 #ruby make 
 sudo apt-get -y install rake
+#markdown
+sudo apt-get -y install python-markdown
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

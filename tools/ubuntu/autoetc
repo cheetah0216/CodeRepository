@@ -14,8 +14,8 @@ FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
 DirEtc=$ETC
 
 Hostname=`hostname`
-Username="cheetah0216"
-Password="$1"
+Username=`sed -n '2p' $LF/.pwd | base64 -d`
+Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
 function etc-bak() {
     if [ -d "$DirVim" ]; then

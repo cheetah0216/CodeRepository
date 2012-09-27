@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PWD=`sed -n '1p' $LF/.pwd | base64 -d`
+expect -c "
+    spawn -noecho sudo -i
+    expect {
+        -re ":" { send \"$PWD\r\"; }
+    }
+    interact
+"

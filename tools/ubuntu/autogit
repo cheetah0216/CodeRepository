@@ -1,0 +1,42 @@
+#!/bin/bash
+
+CurrentDir=`pwd`
+Hostname=`hostname`
+Username=`sed -n '2p' $LF/.pwd | base64 -d`
+Password=`sed -n '3p' $LF/.pwd | base64 -d`
+
+Count=$#
+ComInfo=$1
+
+function check-arg() {
+    if [ "$Count" != "1" ]; then
+        echo "bad argument!"
+        exit
+    fi  
+}
+
+function git-push() {
+    echo `date` >> /root/.lflog
+    echo "$Hostname: $CurrentDir git-pull." >> /root/.lflog
+    git pull >> /root/.lflog
+    echo "$Hostname: $CurrentDir git-push." >> /root/.lflog
+    git add .
+    git status >> /root/.lflog
+    echo "`date`: autogit-->commit" >> /root/.lflog
+    git commit -m "$ComInfo"
+    echo "`date`: autogit-->push" >> /root/.lflog
+    if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
+        local str=$(expect -c "
+            spawn git push
+            expect {
+                -re "sername" { send \"$Username\r\"; exp_continue }
+                -re "assword" { send \"$Password\r\"; }
+          }
+            interact
+        ")
+        echo "$str" >> /root/.lflog
+    fi
+}
+
+check-arg
+git-push

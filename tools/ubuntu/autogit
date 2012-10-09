@@ -10,7 +10,7 @@ ComInfo=$1
 
 function check-arg() {
     if [ "$Count" != "1" ]; then
-        echo "bad argument!"
+        echo "bad argument! eg: autogit \"commit info\""
         exit
     fi  
 }

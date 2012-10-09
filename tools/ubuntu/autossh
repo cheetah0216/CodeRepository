@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ACCOUNT=`sed -n '5p' $LF/.pwd | base64 -d`
+PWD=`sed -n '6p' $LF/.pwd | base64 -d`
+SERVER_IP=`sed -n '4p' $LF/.pwd | base64 -d`
+expect -c "
+    spawn -noecho ssh -l $ACCOUNT $SERVER_IP
+    expect {
+        -re ":" { send \"$PWD\r\"; }
+    }
+    interact
+"
+
+

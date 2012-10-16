@@ -44,10 +44,18 @@ sudo apt-get -y install libcurl4-openssl-dev
 sudo apt-get -y install libcppunit-dev
 sudo apt-get -y install libcppunit-doc
 
-#ruby make 
-sudo apt-get -y install rake
 #markdown
 sudo apt-get -y install python-markdown
+
+#ruby make 
+sudo apt-get -y install rake
+#Install the full Ruby package and RubyGems:
+sudo apt-get install ruby-full rubygems
+export REALLY_GEM_UPDATE_SYSTEM=true
+gem update --system
+#cloudfoundry
+gem install vmc
+
 
 #多系统时更新启动项
 #ubuntun10.10

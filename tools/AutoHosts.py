@@ -1,35 +1,51 @@
 import urllib.request
 import platform
-
+import socket
+import fileinput
+import sys
 
 hostsURL = "https://smarthosts.googlecode.com/svn/trunk/hosts"
+hostName = socket.gethostname()
+sysInfo = platform.system()
 
 def UsePlatform():
-  sysInfo = platform.system()
+  global sysInfo
   if(sysInfo == "Windows"):
     strDes = "C:\Windows\System32\drivers\etc\hosts"
   if(sysInfo == "Linux"):
     strDes = "/etc/hosts"
   return strDes
     
- 
-# get code of given URL as html text string
-# Python3 uses urllib.request.urlopen()
-# instead of Python2's urllib.urlopen() or urllib2.urlopen()
-import urllib.request
-getHosts = urllib.request.urlopen(hostsURL)
-mybytes = getHosts.read()
+def LinuxPlatform(strDir):
+  replaceStr="localhost"
+  for line in fileinput.input(strDir, inplace=1):
+    line = line.replace(replaceStr, hostName)   
+    sys.stdout.write(line)
 
-# note that Python3 does not read the html code as string
-# but as html code bytearray, convert to string with
-strHosts = mybytes.decode("utf8")
+def WriteHosts(strDes):
+  # get code of given URL as html text string
+  # Python3 uses urllib.request.urlopen()
+  # instead of Python2's urllib.urlopen() or urllib2.urlopen()
+  getHosts = urllib.request.urlopen(hostsURL)
+  mybytes = getHosts.read()
 
-strDes = UsePlatform()
-FileHosts = open(strDes, "w")
-FileHosts.write(strHosts)
-FileHosts.close()
-getHosts.close()
+  # note that Python3 does not read the html code as string
+  # but as html code bytearray, convert to string with
+  strHosts = mybytes.decode("utf8")
 
+  FileHosts = open(strDes, "w")
+  FileHosts.write(strHosts)
+  FileHosts.close()
+  getHosts.close()
+
+def main():
+  strDes = UsePlatform()
+  WriteHosts(strDes)
+  # support linux platform
+  LinuxPlatform(strDes)
+
+if __name__ == "__main__":
+  main()
 
 
 

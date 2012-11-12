@@ -58,6 +58,8 @@ gem update --system
 #cloudfoundry
 gem install vmc
 
+#PDF edit
+sudo apt-get -y install xournal
 
 #多系统时更新启动项
 #ubuntun10.10

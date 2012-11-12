@@ -42,7 +42,8 @@ def main():
   strDes = UsePlatform()
   WriteHosts(strDes)
   # support linux platform
-  LinuxPlatform(strDes)
+  if(sysInfo == "Linux"):
+    LinuxPlatform(strDes)
 
 if __name__ == "__main__":
   main()

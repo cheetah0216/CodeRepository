@@ -1,0 +1,44 @@
+#!/bin/bash
+SoftName=$1
+ArguNum=$#
+
+function setup_rpm() {
+    RPMName=$SoftName
+    Length=${#RPMName}
+    TEMP=${RPMName:0:($Length-4)}
+    sudo alien -i $RPMName
+    sudo alien $RPMName
+    #DEBName=$TEMP".deb"
+    DEBName=`ls -lrt |awk -F: '{print '}|tail -n1 | awk '{print $9}'`
+    sudo dpkg -i $DEBName
+}
+
+function setup_deb() {
+    sudo dpkg -i $SoftName
+}
+
+function setup_bin() {
+    chmod a+x $SoftName
+    sudo ./$SoftName
+}
+
+function main() {
+     if [[ $ArguNum != 2 ]]; then
+        echo "only suppot rpm,deb,bin. eg:setup *.deb"
+        exit
+     fi
+    SoftType=${SoftName##*.}
+    case "$SoftType" in
+        rpm) setup_rpm
+             ;;
+        deb) setup_deb
+             ;;
+        bin) setup_bin
+             ;;
+        *)   echo "Invalid type: only suppot rpm,deb,bin"
+    esac
+}
+
+main
+
+

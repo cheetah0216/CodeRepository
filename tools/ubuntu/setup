@@ -23,7 +23,7 @@ function setup_bin() {
 }
 
 function main() {
-     if [[ $ArguNum != 2 ]]; then
+     if [[ $ArguNum != 1 ]]; then
         echo "only suppot rpm,deb,bin. eg:setup *.deb"
         exit
      fi

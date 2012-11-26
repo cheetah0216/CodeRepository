@@ -186,6 +186,11 @@ nmap <silent> <leader>hr <Plug>MarkRegex
 vmap <silent> <leader>hr <Plug>MarkRegex
 
 """"""""""""""""""""""""""""""
+"proc syntax
+""""""""""""""""""""""""""""""
+autocmd BufEnter *.{pc,proc} set filetype=esqlc
+
+""""""""""""""""""""""""""""""
 " markdown
 """"""""""""""""""""""""""""""
 "au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown

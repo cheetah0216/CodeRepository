@@ -9,7 +9,8 @@ HomeBashrc=/home/liufei/.bashrc
 GitConf=/root/.gitconfig
 GitIgnore=/root/.gitignore
 Env=/home/liufei/.env
-FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env")
+PrivateHosts=/etc/PrivateHosts
+FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts")
 
 DirEtc=$ETC
 

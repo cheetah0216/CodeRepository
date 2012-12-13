@@ -1,0 +1,75 @@
+#!/bin/bash
+
+gBLOGDIR=$BLOG/_posts
+gBLOGLIST=$BLOG/blog_list.tmp
+
+gCurrentBlog=""
+gBlogTitle=""
+gBlogLink=""
+gBlogDescription=""
+
+function create_rss_head() {
+cat <<rss_head >rss.tmp
+  <?xml version="1.0" encoding="utf-8"?>
+  <rss version="2.0">
+
+  <channel>
+    <title>liufei</title>
+    <link>http://liufei.name</link>
+    <description>Growth that Starts from Thinking.</description>
+
+rss_head
+}
+
+function create_blog_list() {
+    find $gBLOGDIR -type f > $gBLOGLIST
+}
+
+function analyze_blog() {
+    cat $gCurrentBlog    
+}
+
+function write_rss_body() {
+    LineNum=`cat $gBLOGLIST | wc -l`
+    #echo $LineNum 
+    x=1
+    while [ $x -le $LineNum ]
+    do
+      StrLine=$x"p"
+      gCurrentBlog=`sed -n $StrLine $gBLOGLIST`
+      #echo $temp
+      analyze_blog
+      x=$(( $x + 1 ))
+    done 
+
+}
+
+function create_rss_body() {
+    echo "body"
+    create_blog_list
+    write_rss_body
+}
+
+function create_rss_tail() {
+cat <<rss_tail >>rss.tmp
+
+  </channel>
+
+  </rss>
+
+rss_tail
+}
+
+function rss_test() {
+    rm -f rss.tmp
+}
+
+function main() {
+    rss_test
+    create_rss_head
+    create_rss_body
+    create_rss_tail
+}
+
+main
+

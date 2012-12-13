@@ -42,3 +42,5 @@ filenametags
 
 # LF
 *.lf
+*.bak
+*.tmp

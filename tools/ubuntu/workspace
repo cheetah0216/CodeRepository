@@ -1,12 +1,12 @@
-#/bin/bash
+#!/bin/bash
 
 ProDir=`pwd`
 PathDir="set path+=""$ProDir""/**"
 #create tags file
-ctags -R --fields=+lS
+find . -type f > cscope.files
+ctags --fields=+lS -L cscope.files
 
 #create cscope file
-find . -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.java" -o -name "*.proc" -o -name "*.mak" -o -name "*.init" -o -name "*.txt" -o -name "*.yacc"> cscope.files
 cscope -bq
 
 # generate tag file for lookupfile plugin

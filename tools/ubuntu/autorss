@@ -2,31 +2,56 @@
 
 gBLOGDIR=$BLOG/_posts
 gBLOGLIST=$BLOG/blog_list.tmp
+gRSSXML=$BLOG/atom.xml
 
 gCurrentBlog=""
 gBlogTitle=""
 gBlogLink=""
 gBlogDescription=""
+giDesNum="7"
 
 function create_rss_head() {
-cat <<rss_head >rss.tmp
-  <?xml version="1.0" encoding="utf-8"?>
-  <rss version="2.0">
+cat <<rss_head >$gRSSXML
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
 
-  <channel>
-    <title>liufei</title>
-    <link>http://liufei.name</link>
-    <description>Growth that Starts from Thinking.</description>
+<channel>
+  <title>liufei</title>
+  <link>http://liufei.name</link>
+  <description>Growth that Starts from Thinking.</description>
 
 rss_head
 }
 
 function create_blog_list() {
-    find $gBLOGDIR -type f > $gBLOGLIST
+    #find $gBLOGDIR -type f > $gBLOGLIST
+    find $gBLOGDIR -name "*.md" > $gBLOGLIST
 }
 
 function analyze_blog() {
-    cat $gCurrentBlog    
+    #echo $gCurrentBlog
+    #cat $gCurrentBlog    
+    gBlogLink="http://liufei.name/"
+    temp=""
+    temp1=""
+    gBlogTitle=`sed -n '3p' $gCurrentBlog | cut -d\" -f2`
+    #echo $gBlogTitle
+
+    #####################get blog link###################
+    BlogLinkSrc=`echo $gCurrentBlog | cut -d_ -f2`
+    #echo $BlogLinkSrc
+    temp=`echo $BlogLinkSrc | cut -d/ -f2`
+    gBlogLink=$gBlogLink$temp
+    temp=`echo $BlogLinkSrc | cut -d/ -f3 | cut -d. -f1`
+    tempLength=${#temp}
+    temp1=${temp:11:$tempLength}
+    #echo $temp1
+    gBlogLink=$gBlogLink"/"$temp1".html"
+    #echo $gBlogLink
+
+    StrLine=$giDesNum"p"
+    gBlogDescription=`sed -n $StrLine $gCurrentBlog`
+    #echo $gBlogDescription
 }
 
 function write_rss_body() {
@@ -37,35 +62,41 @@ function write_rss_body() {
     do
       StrLine=$x"p"
       gCurrentBlog=`sed -n $StrLine $gBLOGLIST`
-      #echo $temp
       analyze_blog
+cat <<rss_body >>$gRSSXML
+  <item>
+    <title>$gBlogTitle</title>
+    <link>$gBlogLink</link>
+    <description>$gBlogDescription</description>
+  </item>
+
+rss_body
       x=$(( $x + 1 ))
     done 
 
 }
 
 function create_rss_body() {
-    echo "body"
     create_blog_list
     write_rss_body
 }
 
 function create_rss_tail() {
-cat <<rss_tail >>rss.tmp
+cat <<rss_tail >>$gRSSXML
 
-  </channel>
+</channel>
 
-  </rss>
+</rss>
 
 rss_tail
 }
 
 function rss_test() {
-    rm -f rss.tmp
+    rm -f $gRSSXML
 }
 
 function main() {
-    rss_test
+    #rss_test
     create_rss_head
     create_rss_body
     create_rss_tail

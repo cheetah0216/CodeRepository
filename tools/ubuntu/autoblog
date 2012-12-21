@@ -1,0 +1,55 @@
+#!/bin/bash
+gBlogName=$1
+gBlogTitle=$2
+gBlogCategory=$3
+gBlogTags=$4
+gBlogDescription=$5
+gArgumentNum=$#
+gBlogLink="http://liufei.name"
+
+function autoblog_help() {
+    echo "eg: ./autoblog name title  category  tags  description."
+}
+
+function check_argument() {
+    #echo "$gArgumentNum: $gBlogName, $gBlogTitle, $gBlogCategory, $gBlogTags, $gBlogDescription"
+    if [[ $gArgumentNum != "5" ]]; then
+        autoblog_help
+        exit 
+    fi
+}
+
+function create_blog_head() {
+cat <<blog_head >$gBlogName
+---
+layout: post
+title: $gBlogTitle
+category: $gBlogCategory
+tags: [$gBlogTags]
+description: |
+  $gBlogDescription 
+---
+{% include JB/setup %}
+
+blog_head
+}
+
+function write_rss_xml() {
+    ################## get bolg link ################
+    temp=`echo $gBlogName | cut -d. -f1`
+    tempLength=${#temp} 
+    temp1=${temp:11:$temp}
+    gBlogLink=$gBlogLink"/"$temp1".html"
+    #echo "$gBlogLink"
+
+
+}
+
+function main() {
+    #autoblog_help
+    check_argument
+    create_blog_head
+    write_rss_xml
+}
+
+main

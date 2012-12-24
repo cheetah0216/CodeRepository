@@ -6,6 +6,7 @@ gBlogTags=$4
 gBlogDescription=$5
 gArgumentNum=$#
 gBlogLink="http://liufei.name"
+gRSSXML=$BLOG/atom.xml
 
 function autoblog_help() {
     echo "eg: ./autoblog name title  category  tags  description."
@@ -41,8 +42,23 @@ function write_rss_xml() {
     temp1=${temp:11:$temp}
     gBlogLink=$gBlogLink"/"$temp1".html"
     #echo "$gBlogLink"
+    
+    StrItem="  <item>"
+    StrTitle="    <title>$gBlogTitle</title>"
+    StrLink="    <link>$gBlogLink</link>"
+    StrDescription="    <description>$gBlogDescription</description>"
+    StrItem2="  </item>"
 
-
+    FileLineNum=`cat $gRSSXML | wc -l`
+    iNum=$(( $FileLineNum -3 ))
+    temp=$iNum"i"
+    #echo "$StrItem"
+    #echo "$StrTitle"
+    #echo "$StrLink"
+    #echo "$StrDescription"
+    #echo "$StrItem2"
+    #echo "$temp"
+    sed -i "$temp\\$StrItem\n$StrTitle\n$StrLink\n$StrDescription\n$StrItem\n" $gRSSXML
 }
 
 function main() {

@@ -20,6 +20,15 @@ function check_argument() {
     fi
 }
 
+function analyse_blog(){
+     ################## get bolg link ################
+    temp=`echo $gBlogName | cut -d. -f1`
+    tempLength=${#temp} 
+    temp1=${temp:11:$temp}
+    gBlogLink=$gBlogLink"/"$gBlogCategory"/"$temp1".html"
+    #echo "$gBlogLink"
+}
+
 function create_blog_head() {
 cat <<blog_head >$gBlogName
 ---
@@ -32,17 +41,12 @@ description: |
 ---
 {% include JB/setup %}
 
+[$gBlogTitle]($gBlogLink)
+
 blog_head
 }
 
 function write_rss_xml() {
-    ################## get bolg link ################
-    temp=`echo $gBlogName | cut -d. -f1`
-    tempLength=${#temp} 
-    temp1=${temp:11:$temp}
-    gBlogLink=$gBlogLink"/"$temp1".html"
-    #echo "$gBlogLink"
-    
     StrItem="  <item>"
     StrTitle="    <title>$gBlogTitle</title>"
     StrLink="    <link>$gBlogLink</link>"
@@ -64,6 +68,7 @@ function write_rss_xml() {
 function main() {
     #autoblog_help
     check_argument
+    analyse_blog
     create_blog_head
     write_rss_xml
 }

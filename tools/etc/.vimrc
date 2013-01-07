@@ -132,7 +132,7 @@ nnoremap <silent> <F12> :A<CR>
 "grep.vim
 nnoremap <silent> <F3> :Grep<CR>
 nnoremap <silent> <F4> :Rgrep<CR>
-let Grep_Default_Filelist = '*.c *.cpp *.h'
+let Grep_Default_Filelist = '*.c *.cpp *.h *.C *.CPP *.proc *.java'
 
 "自动补全窗口
 filetype plugin indent on

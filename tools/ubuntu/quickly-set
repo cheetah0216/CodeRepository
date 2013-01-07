@@ -64,6 +64,12 @@ sudo apt-get -y install xournal
 #htop 性能监事工具
 sudo apt-get -y install htop
 
+#打字练习
+sudo apt-get -y install gtypist
+
+#sqlite3 db
+apt-get -y install sqliteman
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

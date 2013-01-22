@@ -2,6 +2,7 @@
 
 echo "***********************************autoetc***********************************" >> /root/.lflog
 DirVim=/root/.vim
+DirSourceList=/etc/apt/sources.list.d
 
 Vimrc=/root/.vimrc
 RootBashrc=/root/.bashrc
@@ -10,7 +11,11 @@ GitConf=/root/.gitconfig
 GitIgnore=/root/.gitignore
 Env=/home/liufei/.env
 PrivateHosts=/etc/PrivateHosts
-FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts")
+SourcesList=/etc/apt/sources.list
+SourcesListSave=/etc/apt/sources.list.save
+
+DirNameArr=("$DirVim" "$DirSourceList")
+FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts" "$SourcesList" "$SourcesListSave")
 
 DirEtc=$ETC
 
@@ -19,9 +24,12 @@ Username=`sed -n '2p' $LF/.pwd | base64 -d`
 Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
 function etc-bak() {
-    if [ -d "$DirVim" ]; then
-        cp -R "$DirVim" "$DirEtc"
-    fi
+    for DirName in ${DirNameArr[@]}
+    do
+        if [ -d "$DirName" ]; then
+            cp -R "$DirName" "$DirEtc"
+        fi
+    done
 
     if [ -f "$RootBashrc" ]; then
         cp "$RootBashrc" "$DirEtc""/.bashrc-root"

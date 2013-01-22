@@ -1,6 +1,12 @@
 #!/bin/bash
-#更新源列表
+##################################setup key#####################################
+#chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+##################################更新源列表####################################
 apt-get update
+
+
 #在右键里面 添加一个“打开终端”的菜单,需重启图形界面
 sudo apt-get -y install nautilus-open-terminal
 #右键中添加"以管理员身份打开"，需重启图形界面

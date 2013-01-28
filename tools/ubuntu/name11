@@ -1,0 +1,12 @@
+---
+layout: post
+title: "ttii"
+category: d
+tags: [d]
+description: |
+  d 
+---
+{% include JB/setup %}
+
+[ttii](http://liufei.name/d/.html)
+

@@ -62,7 +62,7 @@ function write_rss_xml() {
     #echo "$StrDescription"
     #echo "$StrItem2"
     #echo "$temp"
-    sed -i "$temp\\$StrItem\n$StrTitle\n$StrLink\n$StrDescription\n$StrItem\n" $gRSSXML
+    sed -i "$temp\\$StrItem\n$StrTitle\n$StrLink\n$StrDescription\n$StrItem2\n" $gRSSXML
 }
 
 function main() {

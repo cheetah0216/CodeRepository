@@ -1,0 +1,59 @@
+#!/bin/bash
+gArguNum=$#
+gOption=$1
+gAllOption="-a -d -e -p --help"
+gFileDir=$2
+gProgName=$(basename $0)
+
+function clean_up() {
+   echo "clean_up" 
+   exit $1
+}
+
+function fail() {
+    echo "$gProgName: ${1:-"Unknown Error!"}" 1>&2
+    clean_up 1
+}
+
+function usage() {
+    echo "usage"
+}
+
+function check_argument() {
+    if [[ $gArguNum != "2" && $gArguNum != "1" ]]; then
+      usage
+      fail "bad argument!"
+    fi
+    
+    if [[ $gArguNum == "1" && $gOption == "--help" ]]; then
+      usage
+      exit
+    fi
+
+    if [[ ! $gAllOption =~ $gOption ]]; then
+      usage
+      fail "bad argument"
+    fi
+
+    if [[ ! -f "$gFileDir" ]]; then
+      usage
+      fail "don't exist $gFileDir!"
+    fi
+
+}
+
+function create_output_dir() {
+    echo "create_output_dir"
+}
+
+function start_analysis_clippings() {
+   echo "start_analysis_clippings" 
+}
+
+function main() {
+    check_argument
+    create_output_dir
+    start_analysis_clippings
+}
+
+main

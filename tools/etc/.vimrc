@@ -187,15 +187,11 @@ vmap <silent> <leader>hh <Plug>MarkClear
 nmap <silent> <leader>hr <Plug>MarkRegex
 vmap <silent> <leader>hr <Plug>MarkRegex
 
-""""""""""""""""""""""""""""""
-"proc syntax
-""""""""""""""""""""""""""""""
-autocmd BufEnter *.{pc,proc} set filetype=esqlc
-
-""""""""""""""""""""""""""""""
-" markdown
-""""""""""""""""""""""""""""""
-"au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown
+""""filetype
+autocmd BufEnter,BufRead,BufNewFile *.{pc,proc,plsql,sql} set filetype=esqlc
+autocmd BufEnter,BufRead,BufNewFile *.{pc,proc,plsql,sql} set foldmethod=indent
+autocmd BufEnter,BufRead,BufNewFile *.{cc,CC,cpp,CPP} set filetype=cpp
+au BufEnter,BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=markdown
 
 """"""""""""""""""""""""""""""
 "snipmate

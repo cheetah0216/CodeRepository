@@ -199,3 +199,5 @@ au BufEnter,BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetyp
 """"""""""""""""""""""""""""""
 "let g:snips_trigger_key='<F6>'
 
+nmap <F9> :SCCompile<cr>
+nmap <F10> :SCCompileRun<cr>

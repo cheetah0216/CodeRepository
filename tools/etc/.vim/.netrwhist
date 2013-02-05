@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/liufei/github/cheetah0216.github.com/_includes/custom'
 let g:netrw_dirhist_2='/home/liufei/github/cheetah0216.github.com/_includes/JB'
 let g:netrw_dirhist_3='/home/liufei/github/cheetah0216.github.com/_includes/themes'
 let g:netrw_dirhist_4='/etc/apt/sources.list.d'
 let g:netrw_dirhist_5='/etc/apt/apt.conf.d'
 let g:netrw_dirhist_6='/root/.vim'
+let g:netrw_dirhist_7='/home/liufei/github/CodeRepository/Application/iKindleNote'

@@ -75,7 +75,8 @@ set whichwrap=h,b,s,<,>,l "自动折向下一行
 "source $VIMRUNTIME/menu.vim
 
 "忽略大小写
-"nnoremap <silent> <F10> :set ic<CR>
+set ic
+nnoremap <silent> <F10> :set ic<CR>
 
 :let g:vimim_map='c-bslash'	" Ctrl-\ 开关输入法
 

@@ -4,10 +4,18 @@ gOption=$1
 gAllOption="-a -d -e -p"
 gFileDir=$2
 gProgName=$(basename $0)
-gOutputDir=""
-gLogsDir="/home/liufei/log"
+gDate=`date "+%Y-%m-%d-%H%M%S-%N"`
+gOutputDir="$HOME/ikindleNote/""$gDate"
+gNoteTemp="$gOutputDir""/""note.tmp"
+gNoteTempNum=""
+gNote="$gOutputDir""/""note"
+gNoteNum=""
+gNoteEmptyLine=""
+gNotePieceNum="5"
+gLogsDir="$gOutputDir""/""$gDate"".log"
 
-MORE_LOG=0
+
+MORE_LOG=1
 
 function clean_up() {
    echo "clean_up" 
@@ -68,11 +76,68 @@ function check_argument() {
 }
 
 function create_output_dir() {
-    echo "create_output_dir"
+    if [[  ! -d $gOutputDir ]]; then
+      mkdir -p $gOutputDir
+    fi
+    if [[ ! -f $gLogsDir ]]; then
+      touch $gLogsDir
+    fi
+    if [[ ! -f $gNoteTemp ]]; then
+      touch $gNoteTemp
+    fi
+    cp $gFileDir $gNote
+}
+
+function create_books_note() {
+   log -m "func:create_books_note"
+
+   for (( i = 1; i < $gNoteTempNum; i=$(( $i + 5 )) )); do
+     temp="$i""p"
+     title=`sed -n $temp $gNoteTemp`
+     title=${title% *}
+     titleDir="$gOutputDir""/""$title"
+     #echo "$titleDir"
+     if [[ ! -f $titleDir ]]; then
+       touch $titleDir
+       log "create notes $title, line:$i"
+     fi
+     temp="$(( $i + 3 ))""p"
+     note=`sed -n $temp $gNoteTemp`
+     echo "$note" >> $titleDir
+   done
+
+   log -m "end:create_books_note"
+}
+
+function prepare_analysis_clippings() {
+   log -m "func:prepare_analysis_clippings"
+
+   sed '/^$/d' $gNote >> $gNoteTemp 
+  # "http://www.unix.com/shell-programming-scripting/209009-how-remove-unicode-feff-top-file.html
+  # grep -v $(echo -ne '^\0376\0377') $gNoteTemp > 
+   log -m "delete empty line of note."
+   
+   gNoteNum=`cat $gNote | wc -l`
+   gNoteTempNum=`cat $gNoteTemp | wc -l`
+   gNoteEmptyLine=$(( $gNoteNum  - $gNoteTempNum ))
+   log -m "gNoteNum:$gNoteNum ,gNoteTempNum:$gNoteTempNum, $gNoteEmptyLine empty lines by delete."
+   
+   if [[ $(( $gNoteTempNum % $gNotePieceNum )) != "0" ]]; then
+     fail "bad note files."
+   fi
+   log -m "temp notes lines correct."
+
+   create_books_note
+
+   log -m "end:prepare_analysis_clippings"
 }
 
 function start_analysis_clippings() {
-   echo "start_analysis_clippings" 
+   log -m "func:start_analysis_clippings" 
+
+   prepare_analysis_clippings 
+   
+   log -m "end:start_analysis_clippings"
 }
 
 function main() {

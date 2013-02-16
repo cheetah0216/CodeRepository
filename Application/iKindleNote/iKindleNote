@@ -113,14 +113,14 @@ function prepare_analysis_clippings() {
    log -m "func:prepare_analysis_clippings"
    
    sed '/^$/d' $gNote >> $gNoteTemp 
-  # "http://www.unix.com/shell-programming-scripting/209009-how-remove-unicode-feff-top-file.html
-  # tmpDir="$HOME""/ikindleNote/.tmp"
-  # grep -v $(echo -ne '^\0376\0377') $gNoteTemp > $tmpDir
-  # rm -f $gNoteTemp
-  # cp $tmpDir $gNoteTemp
-    
    log -m "delete empty line of note."
-   
+   # remove <feff> character
+   tmpDir="$HOME""/ikindleNote/.tmp"
+   sed '1s/^.//' $gNoteTemp > $tmpDir
+   rm -f $gNoteTemp
+   mv $tmpDir $gNoteTemp
+   log -m "rmove <feff> character"
+
    gNoteNum=`cat $gNote | wc -l`
    gNoteTempNum=`cat $gNoteTemp | wc -l`
    gNoteEmptyLine=$(( $gNoteNum  - $gNoteTempNum ))

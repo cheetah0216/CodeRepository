@@ -14,6 +14,8 @@ gNoteEmptyLine=""
 gNotePieceNum="5"
 gLogsDir="$gOutputDir""/""$gDate"".log"
 
+gBooksNum="0"
+
 
 MORE_LOG=1
 
@@ -99,6 +101,7 @@ function create_books_note() {
      #echo "$titleDir"
      if [[ ! -f $titleDir ]]; then
        touch $titleDir
+       gBooksNum=$(( $gBooksNum + 1 ))
        log "create notes $title, line:$i"
      fi
      temp="$(( $i + 3 ))""p"
@@ -141,6 +144,8 @@ function start_analysis_clippings() {
 
    prepare_analysis_clippings 
    
+   log -m "***************************"
+   log -m "Create $gBooksNum books note, total $(( $gNoteTempNum / $gNotePieceNum )) notes."
    log -m "end:start_analysis_clippings"
 }
 

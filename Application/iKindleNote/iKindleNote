@@ -145,7 +145,7 @@ function start_analysis_clippings() {
    prepare_analysis_clippings 
    
    log -m "***************************"
-   log -m "Create $gBooksNum books note, total $(( $gNoteTempNum / $gNotePieceNum )) notes."
+   log -p "Create $gBooksNum books note, total $(( $gNoteTempNum / $gNotePieceNum )) notes."
    log -m "end:start_analysis_clippings"
 }
 

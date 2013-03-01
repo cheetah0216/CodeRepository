@@ -76,6 +76,12 @@ sudo apt-get -y install gtypist
 #sqlite3 db
 apt-get -y install sqliteman
 
+#send mail form command line
+
+#golang
+apt-get -y install mercurial
+apt-get -y install bison
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

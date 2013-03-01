@@ -176,3 +176,4 @@ function swap()  # Swap 2 filenames around, if they exist
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"

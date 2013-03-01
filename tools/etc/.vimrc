@@ -11,6 +11,7 @@ endfunction
 " Sets how many lines of history VIM has to remember
 set history=1000
 
+
 " Enable filetype plugins
 filetype plugin indent on
 

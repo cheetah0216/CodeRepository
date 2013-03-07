@@ -1,0 +1,9 @@
+#Requirement
+1. Correct all errors and make a successful build;
+2. Figure out all the potential issues;
+3. Enhance the source code to make it better.
+
+# Hint
+1. Editor: vi, nano, gedit (GUI);
+2. Build: make;
+

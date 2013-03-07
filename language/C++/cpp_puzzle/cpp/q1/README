@@ -1,0 +1,26 @@
+# Subject
+Singleton pattern
+
+# Requirement
+Implement a singleton pattern to maintain resource.
+
+# Detail
+1. A implementation of singleton in CPP;
+2. Test program;
+
+# Please try if you can
+1. Extendable (template, inheritence and so on);
+2. Mult-thread safe;
+3. Good code style, less code more readable;
+4. Thread specific safe.
+
+# Files
+singleton.h -- Singleton pattern
+main.cpp    -- Test program
+
+# Hint
+1. Build the program   -- make;
+2. Editor: vi, nano;
+
+# What is 'Singleton' pattern
+In software engineering, the singleton pattern is a design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.

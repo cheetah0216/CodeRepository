@@ -82,6 +82,10 @@ apt-get -y install sqliteman
 apt-get -y install mercurial
 apt-get -y install bison
 
+
+#xml viewer
+#xmlcopyeditor
+
 #多系统时更新启动项
 #ubuntun10.10
 #apt-get install grub2

@@ -6,5 +6,5 @@ int main(int argc, char** argv)
 	a.Show();
 	C c(10);
 	c.Show();
-	return;
+	return 0;
 }

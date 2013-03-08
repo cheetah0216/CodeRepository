@@ -1,13 +1,15 @@
 APP = test
 CXX = g++
 CC = gcc
+CXXFLAGS = -pthread
+CXX_LDFLAGS = -lm -lpthread -static
 
 ALL: APP
 
 APP: test
 
 test: singleton.h main.o
-	$(CXX) -o main main.o
+	$(CXX) $(CXXFLAGS) $(CXX_LDFLAGS) -o main main.o
 
 
 clean:

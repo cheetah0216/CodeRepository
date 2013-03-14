@@ -5,7 +5,7 @@ class A {
 	public:
 		A(int sz){sz_=sz;v=new B[sz_];}
 		A(){v=NULL;sz_=0;}
-		~A() {delete v;}
+		~A() {delete[] v;}
 
 		virtual void Show() {printf("I have %d B.", sz_);}
 

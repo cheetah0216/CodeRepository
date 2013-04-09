@@ -2,9 +2,12 @@
 ##################################setup key#####################################
 #chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+################################# ppa #########################################
+#shutter
+sudo add-apt-repository ppa:shutter/ppa
 
 ##################################更新源列表####################################
-apt-get update
+sudo apt-get update
 
 
 #在右键里面 添加一个“打开终端”的菜单,需重启图形界面
@@ -74,14 +77,16 @@ sudo apt-get -y install htop
 sudo apt-get -y install gtypist
 
 #sqlite3 db
-apt-get -y install sqliteman
+sudo apt-get -y install sqliteman
 
 #send mail form command line
 
 #golang
-apt-get -y install mercurial
-apt-get -y install bison
+sudo apt-get -y install mercurial
+sudo apt-get -y install bison
 
+#ScheenShot:Shutter
+sudo apt-get -y install Shutter
 
 #xml viewer
 #xmlcopyeditor

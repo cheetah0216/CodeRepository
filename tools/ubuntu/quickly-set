@@ -5,7 +5,8 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 ################################# ppa #########################################
 #shutter
 sudo add-apt-repository ppa:shutter/ppa
-
+#python2.6 on ubuntu12.04
+udo add-apt-repository ppa:fkrull/deadsnakes
 ##################################更新源列表####################################
 sudo apt-get update
 
@@ -20,6 +21,7 @@ sudo apt-get -y install catfish
 sudo apt-get -y install rar
 sudo apt-get -y install p7zip
 
+sudo apt-get install python2.6 python2.6-dev
 sudo apt-get -y install python3.2
 sudo apt-get -y install python-tk
 
@@ -87,6 +89,9 @@ sudo apt-get -y install bison
 
 #ScheenShot:Shutter
 sudo apt-get -y install Shutter
+
+#gdmodule - Python GD module
+sudo apt-get -y install python-gd
 
 #xml viewer
 #xmlcopyeditor

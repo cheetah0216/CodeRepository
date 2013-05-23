@@ -1,0 +1,101 @@
+#!/bin/bash
+######################
+#163 source
+#Chrome
+######################
+
+## 
+FLiu="/home/fliu"
+GithubUrl="https://github.com/"
+GithubUser="cheetah0216"
+
+## Workspace
+DirGithub="$FLiu/github"
+DirSoft="$FLiu/soft"
+DirWork="$FLiu/work"
+DirWorkSpaceArr=("$DirGithub" "$DirSoft" "$DirWork")
+
+## Prerequisite Software
+SoftwareArr=("vim" "vim-gnome" "git" "expect")
+
+## Github code url
+UrlCodeRespository=$GithubUrl$GithubUser"/""CodeRespository.git"
+UrlBlog="$GithubUrl$GithubUser"/"$GithubUser"".github.com.git"
+GithubUrlArr=("$UrlCodeRespository" "$UrlBlog")
+
+## Set Vim 
+DirVimConf=$DirGithub"/CodeRepository/tools/etc/.vim"
+VimProfile=$DirGithub"/CodeRepository/tools/etc/.vimrc"
+
+## Set Proflie
+DirSource=$DirGithub"/CodeRepository/tools/etc/"
+
+RootBashrc="/root/.bashrc"
+HomeBashrc="$FLiu/.bashrc"
+GitConf="/root/.gitconfig"
+GitIgnore="/root/.gitignore"
+Env="$FLiu/.env"
+PrivateHosts="/etc/PrivateHosts"
+
+
+############
+function init_workspace() {
+    for DirName in ${DirWorkSpaceArr[@]}
+    do
+        #echo $DirName
+        mkdir -p $DirName
+    done  
+}
+
+function install_prerequisite_soft() {
+    sudo apt-get update
+    for SoftWare in ${SoftwareArr[@]}
+    do
+        sudo apt-get -y install $SoftWare
+    done
+}
+
+function get_github_code() {
+    cd $DirGithub
+    for CodeUrl in ${GithubUrlArr[@]}
+    do
+        #echo "$CodeUrl"
+        git clone $CodeUrl
+    done
+}
+
+function set_vim() {
+    sudo apt-get -y install exuberant-ctags
+    sudo apt-get -y install cscope
+
+    cp -Rf $DirVimConf /root
+    cp -Rf $DirVimConf $FLiu
+    cp $VimProfile /root
+    cp $VimProfile $FLiu
+}
+
+function set_profile() {
+    cd $DirSource 
+    cp .bashrc-root $RootBashrc
+    cp .bashrc-home $HomeBashrc
+    cp .gitconfig   $GitConf
+    cp .gitignore   $GitIgnore
+    cp .env         $Env
+    cp PrivateHosts $PrivateHosts
+    #gvim $RootBashrc $HomeBashrc $GitConf $GitIgnore $Env $PrivateHosts
+}
+
+function install_font() {
+    echo "install_font"
+}
+
+function main() {
+    #init_workspace
+    #install_prerequisite_soft
+    #get_github_code
+    #set_vim
+    #set_profile
+    install_font
+}
+
+main

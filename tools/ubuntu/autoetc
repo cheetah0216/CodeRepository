@@ -1,25 +1,29 @@
 #!/bin/bash
 
 echo "***********************************autoetc***********************************" >> /root/.lflog
+Hostname=`hostname`
+FLiu=""
+if [ $Hostname = "fliu-thinkpad" ];then
+  FLiu="/home/fliu"
+else
+  FLiu="/home/liufei"
+fi
+
 DirVim=/root/.vim
-DirSourceList=/etc/apt/sources.list.d
 
 Vimrc=/root/.vimrc
 RootBashrc=/root/.bashrc
-HomeBashrc=/home/liufei/.bashrc
+HomeBashrc=$FLiu/.bashrc
 GitConf=/root/.gitconfig
 GitIgnore=/root/.gitignore
-Env=/home/liufei/.env
+Env=$FLiu/.env
 PrivateHosts=/etc/PrivateHosts
-SourcesList=/etc/apt/sources.list
-SourcesListSave=/etc/apt/sources.list.save
 
-DirNameArr=("$DirVim" "$DirSourceList")
-FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts" "$SourcesList" "$SourcesListSave")
+DirNameArr=("$DirVim")
+FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts")
 
 DirEtc=$ETC
 
-Hostname=`hostname`
 Username=`sed -n '2p' $LF/.pwd | base64 -d`
 Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
@@ -56,7 +60,7 @@ function git-push() {
     echo "`date`: autoetc-->commit" >> /root/.lflog
     git commit -m "`date`: autoetc."
     echo "`date`: autoetc-->push" >> /root/.lflog
-    if [ "$Hostname" == "liufei-OptiPlex-360" ]; then
+    if [ "$Hostname" == "liufei-OptiPlex-360" || "$Hostname" == "fliu-thinkpad" ]; then
         local str=$(expect -c "
             spawn git push
             expect {

@@ -97,7 +97,12 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-source /home/liufei/.env >/dev/null
+HOSTNAME=`hostname`
+if [ $HOSTNAME = "fliu-thinkpad" ];then
+  source /home/fliu/.env > /dev/null
+else
+  source /home/liufei/.env > /dev/null
+fi
 
 function extract()      # Handy Extract Program.
 {
@@ -176,4 +181,3 @@ function swap()  # Swap 2 filenames around, if they exist
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"

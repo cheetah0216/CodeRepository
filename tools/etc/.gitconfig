@@ -1,5 +1,5 @@
 [user]
-	name = liufei
+	name = fliu
 	email = flying0216@gmail.com
 [credential]
 	helper = cache --timeout=3600

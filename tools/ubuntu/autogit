@@ -25,7 +25,7 @@ function git-push() {
     echo "`date`: autogit-->commit" >> /root/.lflog
     git commit -m "$ComInfo"
     echo "`date`: autogit-->push" >> /root/.lflog
-    if [ "$Hostname" == "liufei-OptiPlex-360" || "$Hostname" == "fliu-thinkpad" ]; then
+    
         local str=$(expect -c "
             spawn git push
             expect {
@@ -35,7 +35,6 @@ function git-push() {
             interact
         ")
         echo "$str" >> /root/.lflog
-    fi
 }
 
 check-arg

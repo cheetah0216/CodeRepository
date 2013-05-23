@@ -5,7 +5,13 @@
 ######################
 
 ## 
-FLiu="/home/fliu"
+HostName=`hostname`
+FLiu=""
+if [ $HostName = "fliu-thinkpad" ];then
+  FLiu="/home/fliu"
+else
+  FLiu="/home/liufei"
+fi
 GithubUrl="https://github.com/"
 GithubUser="cheetah0216"
 

@@ -60,7 +60,7 @@ function git-push() {
     echo "`date`: autoetc-->commit" >> /root/.lflog
     git commit -m "`date`: autoetc."
     echo "`date`: autoetc-->push" >> /root/.lflog
-    if [ "$Hostname" == "liufei-OptiPlex-360" || "$Hostname" == "fliu-thinkpad" ]; then
+
         local str=$(expect -c "
             spawn git push
             expect {
@@ -70,7 +70,6 @@ function git-push() {
             interact
         ")
         echo "$str" >> /root/.lflog
-    fi
 }
 etc-bak
 git-push

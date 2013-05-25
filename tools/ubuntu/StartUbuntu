@@ -6,6 +6,7 @@
 #restart computer
 #set Chrome fonts size (wryh,size:18) 
 #set ubuntu fonts size use unity-tweak-tool(fonts->Text scaling factor:1.05)
+#set terminal size:(home:150,36)
 ############################################
 
 ## 

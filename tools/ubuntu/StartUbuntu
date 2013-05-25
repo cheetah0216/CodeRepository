@@ -1,8 +1,12 @@
 #!/bin/bash
-######################
-#163 source
-#Chrome
-######################
+############################################
+#set 163 source
+#install Chrome
+#run this script
+#restart computer
+#set Chrome fonts size (wryh,size:18) 
+#set ubuntu fonts size use unity-tweak-tool(fonts->Text scaling factor:1.05)
+############################################
 
 ## 
 HostName=`hostname`
@@ -19,10 +23,11 @@ GithubUser="cheetah0216"
 DirGithub="$FLiu/github"
 DirSoft="$FLiu/soft"
 DirWork="$FLiu/work"
-DirWorkSpaceArr=("$DirGithub" "$DirSoft" "$DirWork")
+DirCodeFonts="/usr/share/fonts/codefonts"
+DirWorkSpaceArr=("$DirGithub" "$DirSoft" "$DirWork" "$DirCodeFonts")
 
 ## Prerequisite Software
-SoftwareArr=("vim" "vim-gnome" "git" "expect")
+SoftwareArr=("vim" "vim-gnome" "git" "expect" "wget" "unity-tweak-tool" "gconf-editor")
 
 ## Github code url
 UrlCodeRespository=$GithubUrl$GithubUser"/""CodeRespository.git"
@@ -43,12 +48,14 @@ GitIgnore="/root/.gitignore"
 Env="$FLiu/.env"
 PrivateHosts="/etc/PrivateHosts"
 
+## Set fonts
+UrlFonts="http://d.pcs.baidu.com/file/c6a2fd47f7809e53325ebc59e55cdc06?fid=1258459933-250528-207959182&time=1369317409&sign=FDTAR-DCb740ccc5511e5e8fedcff06b081203-mjGdkfCYxGiZjCbZKgKkGg2LD4Q%3D&rt=sh&expires=8h&r=722107012&sh=1"
 
 ############
 function init_workspace() {
     for DirName in ${DirWorkSpaceArr[@]}
     do
-        #echo $DirName
+        echo $DirName
         mkdir -p $DirName
     done  
 }
@@ -92,7 +99,12 @@ function set_profile() {
 }
 
 function install_font() {
-    echo "install_font"
+    cd $DirCodeFonts
+    wget -O fonts.zip $UrlFonts 
+    unzip fonts.zip
+    sudo chmod 755 $DirCodeFonts/*
+    rm fonts.zip
+    sudo mkfontscale && sudo mkfontdir && sudo fc-cache -fv > /dev/null
 }
 
 function main() {
@@ -101,7 +113,7 @@ function main() {
     #get_github_code
     #set_vim
     #set_profile
-    install_font
+    #install_font
 }
 
 main

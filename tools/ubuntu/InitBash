@@ -1,0 +1,73 @@
+#!/bin/bash
+Output=""
+FunNameArr=()
+FunNameNum=""
+StrExit="exit"
+
+function init_arg() {
+    echo "Please input the script name: " & read Output
+    #echo $Output
+    flag="1"
+    while [ $flag -eq 1 ]
+    do
+      tempName=""
+      echo "Please input function name: " & read tempName
+      if [[ $tempName = $StrExit ]]; then
+        flag="0"
+      else
+        #echo $tempName
+        FunNameArr=("${FunNameArr[@]}" "$tempName")
+      fi
+    done
+}
+
+function create_head() {
+    echo "create_head"
+cat <<create_head >$Output 
+#!/bin/bash
+
+create_head
+}
+
+function create_sub_fun() {
+    echo "create_sub_fun"
+    for funname in ${FunNameArr[@]}
+    do
+      #echo "$funname"
+      funnameTemp=$funname"()"
+cat <<create_sub_fun >>$Output
+function $funnameTemp {
+    echo "$funname"
+}
+
+create_sub_fun
+    done
+}
+
+function create_main_fun() {
+    echo "create_main_fun"
+    echo "function main() {" >>$Output
+    for funname in ${FunNameArr[@]}
+    do
+cat <<create_sub_fun >>$Output
+    $funname
+create_sub_fun
+    done
+    echo "}" >>$Output
+    echo "" >> $Output
+}
+
+function create_tail() {
+    echo "create_tail"
+    echo "main" >>$Output
+}
+
+function main() {
+    init_arg
+    create_head
+    create_sub_fun
+    create_main_fun
+    create_tail
+}
+
+main

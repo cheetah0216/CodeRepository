@@ -1,0 +1,32 @@
+#!/bin/bash
+ModuleName=$1
+
+function BCT_BIP() {
+    echo "BCT_BIP"
+}
+
+
+""假如有proc db的改动呢？
+function BCT_IGEN() {
+    echo "BCT_IGEN"
+    check_
+}
+
+function BCT_ARCH() {
+    echo "BCT_ARCH"
+}
+
+function main() {
+    case $ModuleName in
+      "IGEN") BCT_IGEN
+              ;;
+       "BIP") BCT_BIP
+              ;;
+      "ARCH") BCT_ARCH
+              ;;
+           *) echo "Don't support $ModuleName moduld!" 
+              ;;
+    esac
+}
+
+main

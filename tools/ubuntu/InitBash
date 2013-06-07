@@ -1,4 +1,15 @@
 #!/bin/bash
+##################################################
+#./InitBash
+#
+#input file name:
+#   test
+#input function name:
+#   create_fun1
+#   create_fun2    
+#   create_fun3
+#   exit
+##################################################
 Output=""
 FunNameArr=()
 FunNameNum=""

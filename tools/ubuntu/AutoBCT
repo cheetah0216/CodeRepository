@@ -1,15 +1,60 @@
 #!/bin/bash
-ModuleName=$1
+gModuleName=$1
+gOrgiBCTPkg=$2
+
+#global variable：log
+MORE_LOG=1
+gProgName=$(basename $0)
+gDate=`date "+%Y-%m-%d-%H%M%S-%N"`
+gOutputDir="$HOME/AutoBCT/""$gModuleName""_BCT_""$gDate"
+gLogsDir="$gOutputDir""/""$gModuleName""_BCT_""$gDate"".log"
+
+#usage: log -p "welcome..."
+#log   : only write to logs.
+#log -p: print to screen and write to logs.
+#log -m: more log write to logs don't print to screen.
+#log -e: error output to screen and logs.
+function log() {
+     if [[ $1 == "-p" ]]; then
+       echo "$gProgName: $2" && [[ -f $gLogsDir ]] && echo "$gProgName: $2" >> $gLogsDir
+     elif [[ $1 == "-e" ]]; then
+       echo "$gProgName:ERROR: ${2:-"Unknown Error!"}" 1>&2 && [[ -f $gLogsDir ]] && echo "$gProgName:ERROR: ${2:-"Unknown Error!"}" >> $gLogsDir
+     elif [[ $1 == "-m" && $MORE_LOG == 1 ]]; then
+       [[ -f $gLogsDir ]] && echo "$gProgName: $2" >> $gLogsDir
+     elif [[ $# == 1 ]]; then
+       [[ -f $gLogsDir ]] && echo "$gProgName: $1" >> $gLogsDir
+     fi
+}
+
+function init_bct() {
+    if [[  ! -d $gOutputDir ]]; then
+      mkdir -p $gOutputDir
+    fi
+    if [[ ! -f $gLogsDir ]]; then
+      touch $gLogsDir
+    fi
+}
+
+function BCT_IGEN() {
+    log -m "func:BCT_IGEN()"
+    log -p "Start IGEN module BCT..."
+    log -p "BCT Directory: $gOutputDir"
+    log -p "BCT logs: $gLogsDir"
+    
+    log -p "unzip $gOrgiBCTPkg packages."
+    cd $gOutputDir
+    zat $gOrgiBCTPkg | tar xvf -
+
+    log -p "set run BCT env."
+    export LIBPATH="$OutputDir/site_specific/lib:$LIBPATH"
+    export ARBORBIN="$OutputDir/bin:$ARBORBIN"
+
+    log -m "end:BCT_IGEN()"
+}
 
 function BCT_BIP() {
     echo "BCT_BIP"
-}
-
-
-""假如有proc db的改动呢？
-function BCT_IGEN() {
-    echo "BCT_IGEN"
-    check_
+    
 }
 
 function BCT_ARCH() {
@@ -17,14 +62,15 @@ function BCT_ARCH() {
 }
 
 function main() {
-    case $ModuleName in
+    init_bct
+    case $gModuleName in
       "IGEN") BCT_IGEN
               ;;
        "BIP") BCT_BIP
               ;;
       "ARCH") BCT_ARCH
               ;;
-           *) echo "Don't support $ModuleName moduld!" 
+           *) echo "Don't support $gModuleName moduld!" 
               ;;
     esac
 }

@@ -2,10 +2,10 @@
 gModuleName=$1
 gOrgiBCTPkg=$2
 
-#global variable：log
+#global variable:log
 MORE_LOG=1
 gProgName=$(basename $0)
-gDate=`date "+%Y-%m-%d-%H%M%S-%N"`
+gDate=`date "+%Y-%m-%d-%H%M%S"`
 gOutputDir="$HOME/AutoBCT/""$gModuleName""_BCT_""$gDate"
 gLogsDir="$gOutputDir""/""$gModuleName""_BCT_""$gDate"".log"
 
@@ -43,9 +43,10 @@ function BCT_IGEN() {
     
     log -p "unzip $gOrgiBCTPkg packages."
     cd $gOutputDir
-    zat $gOrgiBCTPkg | tar xvf -
+    zcat $gOrgiBCTPkg | tar xvf - > /dev/null 2>&1
+    echo "......"
 
-    log -p "set run BCT env."
+    log -p "set BCT env."
     export LIBPATH="$OutputDir/site_specific/lib:$LIBPATH"
     export ARBORBIN="$OutputDir/bin:$ARBORBIN"
 

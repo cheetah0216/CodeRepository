@@ -52,6 +52,9 @@ PrivateHosts="/etc/PrivateHosts"
 ## Set fonts
 UrlFonts="http://d.pcs.baidu.com/file/c6a2fd47f7809e53325ebc59e55cdc06?fid=1258459933-250528-207959182&time=1369317409&sign=FDTAR-DCb740ccc5511e5e8fedcff06b081203-mjGdkfCYxGiZjCbZKgKkGg2LD4Q%3D&rt=sh&expires=8h&r=722107012&sh=1"
 
+## install latest JDk
+UrlJDKPages="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html"
+
 ############
 function init_workspace() {
     for DirName in ${DirWorkSpaceArr[@]}
@@ -108,6 +111,33 @@ function install_font() {
     sudo mkfontscale && sudo mkfontdir && sudo fc-cache -fv > /dev/null
 }
 
+function install_jdk() {
+   cd /tmp
+   wget -O JDK.html $UrlJDKPages
+   url_latest_jdk=`cat /tmp/JDK.html | grep jdk | grep "linux-x64.tar.gz" | cut -d\" -f12`
+   latest_jdk_name=${url_latest_jdk##*/}
+   #echo $url_latest_jdk
+   #echo $latest_jdk_name
+   wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" $url_latest_jdk -O $latest_jdk_name
+   rm /tmp/JDK.html
+   mv $latest_jdk_name /usr/local/
+   cd /usr/local/
+   tar zxvf $latest_jdk_name
+   jdk_dir=`ls -lrt |awk -F: '{print '}|tail -n2 | awk '{print $9}' | grep -v ".tar.gz"`
+   #echo $jdk_dir
+   ln -s $jdk_dir jdk
+   sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/jdk/bin/java" 1
+   sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/jdk/bin/javac" 1
+   sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/jdk/bin/javaws" 1
+   sudo update-alternatives --install "/usr/lib/mozilla/plugins/libjavaplugin.so" "mozilla-javaplugin.so" "/usr/local/jdk/jre/lib/amd64/libnpjp2.so" 1
+   sudo update-alternatives --config java
+   sudo update-alternatives --config javac
+   sudo update-alternatives --config javaws
+   #export JAVA_HOME=/usr/local/jdk
+   #export PATH=$PATH:$JAVA_HOME/bin
+   #export CLASSPATH=$JAVA_HOME/jre/bin/lib/ext:$JAVA_HOME/lib/tools.jar
+}
+
 function main() {
     #init_workspace
     #install_prerequisite_soft
@@ -115,6 +145,7 @@ function main() {
     #set_vim
     #set_profile
     #install_font
+    #install_jdk
 }
 
 main

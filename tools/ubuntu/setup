@@ -35,7 +35,29 @@ function main() {
              ;;
         bin) setup_bin
              ;;
-        *)   echo "Invalid type: only suppot rpm,deb,bin"
+    tar.bz2) tar xvjf $SoftName    
+             ;;
+     tar.gz) tar xvzf $SoftName
+             ;;
+      *.bz2) bunzip2 $SoftName     
+             ;;
+      *.rar) unrar x $SoftName     
+             ;;
+       *.gz) gunzip $SoftName     
+             ;;
+      *.tar) tar xvf $SoftName  
+             ;;
+     *.tbz2) tar xvjf $SoftName   
+             ;;
+      *.tgz) tar xvzf $SoftName
+             ;;
+      *.zip) unzip $SoftName
+             ;;
+        *.Z) uncompress $SoftName
+             ;;
+       *.7z) 7z x $SoftName   
+             ;;
+        *)   echo "Invalid type"
     esac
 }
 

@@ -138,6 +138,10 @@ function install_jdk() {
    #export CLASSPATH=$JAVA_HOME/jre/bin/lib/ext:$JAVA_HOME/lib/tools.jar
 }
 
+function goagnent() {
+    
+}
+
 function main() {
     #init_workspace
     #install_prerequisite_soft
@@ -146,6 +150,7 @@ function main() {
     #set_profile
     #install_font
     #install_jdk
+    install_goagnent
 }
 
 main

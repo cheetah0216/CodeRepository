@@ -2,6 +2,7 @@
 ############################################
 #set 163 source
 #install Chrome
+#install wine. run configuer wine,(create wine dir in $HOME by configure wine)
 #run this script
 #restart computer
 #set Chrome fonts size (wryh,size:18) 
@@ -50,10 +51,13 @@ Env="$FLiu/.env"
 PrivateHosts="/etc/PrivateHosts"
 
 ## Set fonts
-UrlFonts="http://d.pcs.baidu.com/file/c6a2fd47f7809e53325ebc59e55cdc06?fid=1258459933-250528-207959182&time=1369317409&sign=FDTAR-DCb740ccc5511e5e8fedcff06b081203-mjGdkfCYxGiZjCbZKgKkGg2LD4Q%3D&rt=sh&expires=8h&r=722107012&sh=1"
+UrlFonts="http://www.baidupcs.com/file/c6a2fd47f7809e53325ebc59e55cdc06?xcode=0663ef2f90f95b44bddb9dcceb5165dc&fid=1258459933-250528-207959182&time=1372155170&sign=FDTAXER-DCb740ccc5511e5e8fedcff06b081203-IgJEd6J8640k99QDpisOjnheHYU%3D&to=wb&fm=N,N,T&expires=8h&rt=pr&r=950560470&logid=3775787727"
 
 ## install latest JDk
 UrlJDKPages="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html"
+
+## install PDF XChange Viewer
+UrlPDFXCview="http://hot.baidupcs.com/file/28e294f467369e0709131bd23de704f5?xcode=17dfec050908c0295de00b52b6944aae&fid=1258459933-250528-385249265&time=1372153880&sign=FDTAXER-DCb740ccc5511e5e8fedcff06b081203-2Rf8ZIYy%2BJUQQ6pSmr3WVBYoAGE%3D&to=hb&fm=N,Q,U&expires=8h&rt=pr&r=536146358&logid=1528086904"
 
 ############
 function init_workspace() {
@@ -138,8 +142,21 @@ function install_jdk() {
    #export CLASSPATH=$JAVA_HOME/jre/bin/lib/ext:$JAVA_HOME/lib/tools.jar
 }
 
+#PDF XChange Viewer
+function install_PDFXCview() {
+   cd $FLiu
+   cd .wine/drive_c/Program\ Files/
+   PDFXCview_Name="PDFXCview_Port.zip"
+   PDFXCview_Dir="PDFXCview_Port"
+   wget -c -O "$PDFXCview_Name" $UrlPDFXCview
+   unzip $PDFXCview_Name
+   rm $PDFXCview_Name
+   cd $PDFXCview_Dir
+   cp PDFXCview /usr/bin
+}
+
 function goagnent() {
-    
+   echo "goagnent" 
 }
 
 function main() {
@@ -150,7 +167,8 @@ function main() {
     #set_profile
     #install_font
     #install_jdk
-    install_goagnent
+    install_PDFXCview
+    #install_goagnent
 }
 
 main

@@ -202,6 +202,3 @@ au BufEnter,BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetyp
 
 nmap <F9> :SCCompile<cr>
 nmap <F10> :SCCompileRun<cr>
-
-"disable netrw to generate history file
-au VimLeave * if filereadable("[path here]/.netrwhist")|call delete("[path here]/.netrwhist")|endif

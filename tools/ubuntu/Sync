@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function etc_sync() {
+    echo "etc_sync"
+}
+
+function main() {
+    etc_sync
+}
+
+main

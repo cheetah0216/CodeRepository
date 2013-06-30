@@ -59,6 +59,10 @@ UrlJDKPages="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downlo
 ## install PDF XChange Viewer
 UrlPDFXCview="http://hot.baidupcs.com/file/28e294f467369e0709131bd23de704f5?xcode=17dfec050908c0295de00b52b6944aae&fid=1258459933-250528-385249265&time=1372153880&sign=FDTAXER-DCb740ccc5511e5e8fedcff06b081203-2Rf8ZIYy%2BJUQQ6pSmr3WVBYoAGE%3D&to=hb&fm=N,Q,U&expires=8h&rt=pr&r=536146358&logid=1528086904"
 
+#install_standard_eclipse
+#UrlStandEclipse="http://www.eclipse.org/downloads/"
+UrlStandEclipse="http://mirror.bit.edu.cn/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-linux-gtk-x86_64.tar.gz"
+
 ############
 function init_workspace() {
     for DirName in ${DirWorkSpaceArr[@]}
@@ -155,6 +159,18 @@ function install_PDFXCview() {
    cp PDFXCview /usr/bin
 }
 
+function install_standard_eclipse() {
+    cd /tmp
+    #wget -O DwEclipse.html $UrlStandEclipse
+    #Url_Linux64_Ec=`cat /tmp/DwEclipse.html | grep "Linux 64" | grep "Eclipse Standard" | cut -d\" -f4`
+    #echo $Url_Linux64_Ec
+    #wget -O EcStand.html $Url_Linux64_Ec
+    #Url_Linux64_Ec=`cat /tmp/EcStand.html | grep "Asia" | cut -d\" -f2`
+    #echo $Url_Linux64_Ec
+    #rm DwEclipse.html
+    #rm EcStand.html
+}
+
 function goagnent() {
    echo "goagnent" 
 }
@@ -167,7 +183,8 @@ function main() {
     #set_profile
     #install_font
     #install_jdk
-    install_PDFXCview
+    #install_PDFXCview
+    install_standard_eclipse
     #install_goagnent
 }
 

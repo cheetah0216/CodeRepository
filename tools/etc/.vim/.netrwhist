@@ -1,9 +1,2 @@
 let g:netrw_dirhistmax  =10
-<<<<<<< HEAD
-let g:netrw_dirhist_cnt =5
-=======
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/liufei/github/CodeRepository/lflib/c++/numeric/main.cpp'
-let g:netrw_dirhist_2='/home/liufei/github/CodeRepository/tools/etc'
-let g:netrw_dirhist_3='/home/liufei/github/CodeRepository/tools/etc/.vim'
->>>>>>> 1f0f4990deef7cfbcc0005841c7a5d90d4d23890
+let g:netrw_dirhist_cnt =7

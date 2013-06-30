@@ -24,6 +24,8 @@ Env="$FLiu/.env"
 PrivateHosts="/etc/PrivateHosts"
 
 function etc_sync() {
+    cd $CODE
+    git pull 
     
     cp -Rf $DirVimConf /root
     cp -Rf $DirVimConf $FLiu

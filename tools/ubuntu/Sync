@@ -1,7 +1,42 @@
 #!/bin/bash
 
+HostName=`hostname`
+FLiu=""
+if [ $HostName = "fliu-thinkpad" ];then
+  FLiu="/home/fliu"
+else
+  FLiu="/home/liufei"
+fi
+DirGithub="$FLiu/github"
+
+## Set Vim 
+DirVimConf=$DirGithub"/CodeRepository/tools/etc/.vim"
+VimProfile=$DirGithub"/CodeRepository/tools/etc/.vimrc"
+
+## Set Proflie
+DirSource=$DirGithub"/CodeRepository/tools/etc/"
+
+RootBashrc="/root/.bashrc"
+HomeBashrc="$FLiu/.bashrc"
+GitConf="/root/.gitconfig"
+GitIgnore="/root/.gitignore"
+Env="$FLiu/.env"
+PrivateHosts="/etc/PrivateHosts"
+
 function etc_sync() {
-    echo "etc_sync"
+    
+    cp -Rf $DirVimConf /root
+    cp -Rf $DirVimConf $FLiu
+    cp $VimProfile /root
+    cp $VimProfile $FLiu
+
+    cd $DirSource 
+    cp .bashrc-root $RootBashrc
+    cp .bashrc-home $HomeBashrc
+    cp .gitconfig   $GitConf
+    cp .gitignore   $GitIgnore
+    cp .env         $Env
+    cp PrivateHosts $PrivateHosts
 }
 
 function main() {

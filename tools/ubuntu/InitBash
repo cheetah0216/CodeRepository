@@ -73,12 +73,17 @@ function create_tail() {
     echo "main" >>$Output
 }
 
+function chmod_script() {
+    chmod 777 $Output
+}
+
 function main() {
     init_arg
     create_head
     create_sub_fun
     create_main_fun
     create_tail
+    chmod_script
 }
 
 main

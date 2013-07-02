@@ -169,6 +169,13 @@ function install_standard_eclipse() {
     #echo $Url_Linux64_Ec
     #rm DwEclipse.html
     #rm EcStand.html
+    #wget -O Eclipse_standard_linux_64.tar.gz $UrlStandEclipse
+    #mv Eclipse_standard_linux_64.tar.gz $SOFT 
+    cd $SOFT
+    setup Eclipse_standard_linux_64.tar.gz
+    tmpEcliseName=`ls -lrt |awk -F: '{print '}|tail -n1 | awk '{print $9}'`
+    setup $tmpEcliseName
+     
 }
 
 function goagnent() {

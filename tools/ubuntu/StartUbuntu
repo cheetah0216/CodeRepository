@@ -63,6 +63,9 @@ UrlPDFXCview="http://hot.baidupcs.com/file/28e294f467369e0709131bd23de704f5?xcod
 #UrlStandEclipse="http://www.eclipse.org/downloads/"
 UrlStandEclipse="http://mirror.bit.edu.cn/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-linux-gtk-x86_64.tar.gz"
 
+#instal goagnent
+UrlGoagnent="https://github.com/goagent/goagent.git"
+
 ############
 function init_workspace() {
     for DirName in ${DirWorkSpaceArr[@]}
@@ -175,11 +178,25 @@ function install_standard_eclipse() {
     setup Eclipse_standard_linux_64.tar.gz
     tmpEcliseName=`ls -lrt |awk -F: '{print '}|tail -n1 | awk '{print $9}'`
     setup $tmpEcliseName
-     
+    ##missing shortcut
+    #.... 
 }
 
-function goagnent() {
-   echo "goagnent" 
+function install_goagnent() {
+    cd $DirSoft
+    git clone $UrlGoagnent
+
+    #configure proxy.ini files
+    cd $DirSoft/goagent/local
+    cp proxy.ini proxy.ini.bk
+    appid_line_no=`grep -n "appid" proxy.ini | cut -d: -f1`
+    temp=$appid_line_no"d"
+    sed -i $temp proxy.ini  
+    appid_str=`sed -n '7p' $LF/.pwd | base64 -d`
+    strtemp="appid = $appid_str"
+    sed -i "$appid_line_no i $strtemp" proxy.ini
+    #remove ^M
+    dos2unix proxy.ini
 }
 
 function main() {
@@ -191,7 +208,7 @@ function main() {
     #install_font
     #install_jdk
     #install_PDFXCview
-    install_standard_eclipse
+    #install_standard_eclipse
     #install_goagnent
 }
 

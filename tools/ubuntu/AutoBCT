@@ -44,9 +44,8 @@ function BCT_IGEN() {
     log -p "unzip $gOrgiBCTPkg packages."
     cd $gOutputDir
     zcat $gOrgiBCTPkg | tar xvf - > /dev/null 2>&1
-    echo "......"
 
-    log -p "set BCT env."
+    log -p "set run BCT env."
     export LIBPATH="$OutputDir/site_specific/lib:$LIBPATH"
     export ARBORBIN="$OutputDir/bin:$ARBORBIN"
 

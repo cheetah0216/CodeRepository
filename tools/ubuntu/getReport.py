@@ -162,7 +162,7 @@ def get_preb_report_info(prep_report_url):
 
 
 if __name__ == '__main__':
-    get_release_detail_info('RELDB00018712') 
+    get_release_detail_info('RELDB00018711') 
     prep_report_url = get_preb_report_url()
     get_preb_report_info(prep_report_url)
   

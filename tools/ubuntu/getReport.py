@@ -2,11 +2,8 @@ import urllib
 import urllib2
 import cookielib
 import json
-import mechanize
-import sys
-import re
-import base64
-from urlparse import urlparse
+from ntlm import HTTPNtlmAuthHandler
+
 
 def get_release_detail_info(release_id):
     '''
@@ -127,7 +124,6 @@ def get_release_detail_info(release_id):
     result = urllib2.urlopen(request_url).read()
     #print result
 
-
     '''
     write detail release tp release.json
     '''
@@ -137,59 +133,36 @@ def get_release_detail_info(release_id):
     release.close
 
 def get_preb_report_url():
-    release_json = file('release.tmp')
+    release_json = file('release.json')
     release = json.load(release_json)
     #print release.keys()
     #print release['fields'][44]['CurrentValue'][26]
     return release['fields'][44]['CurrentValue'][26]
 
 def get_preb_report_info(prep_report_url):
+    user = 'COMVERSE\\fliu'
+    password = 'Pw01Cdrdate'
+    url =  prep_report_url.strip()
 
+    passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+    passman.add_password(None, url, user, password)
+    # create the NTLM authentication handler
+    auth_NTLM = HTTPNtlmAuthHandler.HTTPNtlmAuthHandler(passman)
+    # create and install the opener
+    opener = urllib2.build_opener(auth_NTLM)
+    urllib2.install_opener(opener)
+    # retrieve the result
+    response = urllib2.urlopen(url)
+    result = response.read()
+
+    report = open('report.html','a')
+    report.write(result)
+    report.write('\n')
+    report.close
 
 
 if __name__ == '__main__':
-    #get_release_detail_info('RELDB00018711') 
+    get_release_detail_info('RELDB00018712') 
     prep_report_url = get_preb_report_url()
     get_preb_report_info(prep_report_url)
-
-'''
-    cj=cookielib.CookieJar()
-    cookie_support= urllib2.HTTPCookieProcessor(cj)
-    opener = urllib2.build_opener(cookie_support, urllib2.HTTPHandler)
-    urllib2.install_opener(opener)
-
-    headers = {
-        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Charset':'GBK,utf-8;q=0.7,*;q=0.3',
-        'Accept-Encoding':'gzip,deflate,sdch',
-        'Accept-Language':'zh-CN,zh;q=0.8',
-        'Authorization':'NTLM TlRMTVNTUAADAAAAGAAYAG4AAAAYABgAhgAAAAAAAABAAAAACAAIAEAAAAAmACYASAAAAAAAAAAAAAAABYIIAGYAbABpAHUAbABpAHUAZgBlAGkALQBPAHAAdABpAFAAbABlAHgALQAzADYAMADIU2CNnBj0bQAAAAAAAAAAAAAAAAAAAADfX4LZsiP/oIuqLwTAN385eATEHaqBMDw=',
-        'Cache-Control':'max-age=0',
-        'Connection':'keep-alive',
-        'Host':'us-dnv-sp01',
-        'User-Agent':'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
-    }
-
-    hearders1 = {
-        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Charset':'GBK,utf-8;q=0.7,*;q=0.3',
-        'Accept-Encoding':'gzip,deflate,sdch',
-        'Accept-Language':'zh-CN,zh;q=0.8',
-        'Cache-Control':'max-age=0',
-        'Connection':'keep-alive',
-        'Cookie':'WSS_KeepSessionAuthenticated=80',
-        'Host':'us-dnv-sp01',
-        'If-Modified-Since':'Mon, 24 Jun 2013 09:59:33 GMT',
-        'If-None-Match':'"{73F095F2-48DD-46FE-A5AF-3F6F81A10B1B},3"',
-        'Referer':'http://10.8.33.110/cqweb/',
-        'User-Agent':'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31 AlexaToolbar/alxg-3.1'
-    }
-    req = urllib2.Request(
-            url = prep_report_url,
-            headers = hearders1
-    )
-    
-    result= urllib2.urlopen(req).read()
-
-    print result
-'''
+  

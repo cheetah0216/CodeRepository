@@ -232,7 +232,7 @@ function install_bae_django_python() {
     
     #test Django
     django-admin.py startproject example_django
-    cd example
+    cd example_django
     #python manage.py runserver 8080
     #http://127.0.0.1:8080/
 

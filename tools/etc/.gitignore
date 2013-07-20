@@ -44,3 +44,6 @@ filenametags
 *.lf
 *.bak
 *.tmp
+
+# Python
+*.pyc

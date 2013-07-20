@@ -114,3 +114,4 @@ else
 fi
 $UBUNTU/autoroot  
 
+source /root/.pythonbrew/etc/bashrc

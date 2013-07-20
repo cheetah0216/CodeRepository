@@ -29,7 +29,7 @@ DirCodeFonts="/usr/share/fonts/codefonts"
 DirWorkSpaceArr=("$DirGithub" "$DirSoft" "$DirWork" "$DirCodeFonts")
 
 ## Prerequisite Software
-SoftwareArr=("vim" "vim-gnome" "git" "expect" "wget" "unity-tweak-tool" "gconf-editor" "alien")
+SoftwareArr=("vim" "vim-gnome" "git" "expect" "wget" "unity-tweak-tool" "gconf-editor" "alien" "python-setuptools")
 
 ## Github code url
 UrlCodeRespository=$GithubUrl$GithubUser"/""CodeRespository.git"
@@ -65,6 +65,9 @@ UrlStandEclipse="http://mirror.bit.edu.cn/eclipse/technology/epp/downloads/relea
 
 #instal goagnent
 UrlGoagnent="https://github.com/goagent/goagent.git"
+
+#install pythonbrew
+PythonbrewDependLibsArr=("build-essential" "libbz2-dev" "libsqlite3-dev" "zlib1g-dev" "libxml2-dev" "libxslt1-dev" "libreadline5" "libreadline5-dev" "libgdbm-dev" "libgdb-dev" "libxml2" "libssl-dev" "tk-dev" "libgdbm-dev" "libexpat1-dev" "libncursesw5-dev")
 
 ############
 function init_workspace() {
@@ -199,6 +202,46 @@ function install_goagnent() {
     dos2unix proxy.ini
 }
 
+#pythonbrew is a program to automate the building and installation of Python in the users $HOME.
+function install_pythonbrew() {
+    sudo easy_install pythonbrew
+    pythonbrew_install
+    for dependLibs in ${PythonbrewDependLibsArr[@]}
+    do
+        #echo "$dependLibs"
+        sudo apt-get -y install $dependLibs
+    done
+    source /root/.pythonbrew/etc/bashrc
+}
+
+#python2.7.2
+#django1.4
+function install_bae_django_python() {
+    #install python2.7.2
+    pythonbrew install 2.7.2
+    pythonbrew switch 2.7.2
+
+    #install django1.4
+    easy_install pip
+    pip install virtualenv
+    cd $FLiu
+    virtualenv virtual_env
+    source $FLiu/virtual_env/bin/activate 
+    pip install Django==1.4
+    pip freeze
+    
+    #test Django
+    django-admin.py startproject example_django
+    cd example
+    #python manage.py runserver 8080
+    #http://127.0.0.1:8080/
+
+    #change the django versions in python2.7.2
+    #deactivate
+    #pip install Django==1.5.1
+    #pip freeze
+}
+
 function main() {
     #init_workspace
     #install_prerequisite_soft
@@ -210,6 +253,8 @@ function main() {
     #install_PDFXCview
     #install_standard_eclipse
     #install_goagnent
+    #install_pythonbrew
+    #install_bae_django_python
 }
 
 main

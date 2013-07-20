@@ -104,6 +104,8 @@ else
   source /home/liufei/.env > /dev/null
 fi
 
+source /root/.pythonbrew/etc/bashrc
+
 function extract()      # Handy Extract Program.
 {
      if [ -f $1 ] ; then
@@ -181,3 +183,4 @@ function swap()  # Swap 2 filenames around, if they exist
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
+

@@ -164,16 +164,16 @@ function install_PDFXCview() {
 
 function install_standard_eclipse() {
     cd /tmp
-    #wget -O DwEclipse.html $UrlStandEclipse
-    #Url_Linux64_Ec=`cat /tmp/DwEclipse.html | grep "Linux 64" | grep "Eclipse Standard" | cut -d\" -f4`
+    wget -O DwEclipse.html $UrlStandEclipse
+    Url_Linux64_Ec=`cat /tmp/DwEclipse.html | grep "Linux 64" | grep "Eclipse Standard" | cut -d\" -f4`
     #echo $Url_Linux64_Ec
-    #wget -O EcStand.html $Url_Linux64_Ec
-    #Url_Linux64_Ec=`cat /tmp/EcStand.html | grep "Asia" | cut -d\" -f2`
+    wget -O EcStand.html $Url_Linux64_Ec
+    Url_Linux64_Ec=`cat /tmp/EcStand.html | grep "Asia" | cut -d\" -f2`
     #echo $Url_Linux64_Ec
-    #rm DwEclipse.html
-    #rm EcStand.html
-    #wget -O Eclipse_standard_linux_64.tar.gz $UrlStandEclipse
-    #mv Eclipse_standard_linux_64.tar.gz $SOFT 
+    rm DwEclipse.html
+    rm EcStand.html
+    wget -O Eclipse_standard_linux_64.tar.gz $UrlStandEclipse
+    mv Eclipse_standard_linux_64.tar.gz $SOFT 
     cd $SOFT
     setup Eclipse_standard_linux_64.tar.gz
     tmpEcliseName=`ls -lrt |awk -F: '{print '}|tail -n1 | awk '{print $9}'`

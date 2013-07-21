@@ -29,7 +29,7 @@ DirCodeFonts="/usr/share/fonts/codefonts"
 DirWorkSpaceArr=("$DirGithub" "$DirSoft" "$DirWork" "$DirCodeFonts")
 
 ## Prerequisite Software
-SoftwareArr=("vim" "vim-gnome" "git" "expect" "wget" "unity-tweak-tool" "gconf-editor" "alien" "python-setuptools")
+SoftwareArr=("vim" "vim-gnome" "git" "expect" "wget" "unity-tweak-tool" "gconf-editor" "alien" "python-setuptools" "unrar")
 
 ## Github code url
 UrlCodeRespository=$GithubUrl$GithubUser"/""CodeRespository.git"

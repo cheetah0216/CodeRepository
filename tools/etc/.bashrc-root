@@ -184,3 +184,4 @@ function swap()  # Swap 2 filenames around, if they exist
     mv $TMPFILE "$2"
 }
 
+keynav 1>/dev/null 2>&1 &

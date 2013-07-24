@@ -4,7 +4,11 @@ function keynav() {
     getKeynavName=`ps -ef | grep keynav | grep -v 'grep' | awk '{print $8}'`
     #echo $getKeynavName
     if [[ -z $getKeynavName ]]; then
-      keynav >/dev/null &
+      echo $getKeynavName
+      #keynav >/dev/null &
+      keynav
+      getKeynavName=`ps -ef | grep keynav | grep -v 'grep' | awk '{print $8}'`
+      echo $getKeynavName
     fi
 }
 

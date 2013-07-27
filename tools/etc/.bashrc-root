@@ -100,12 +100,11 @@ fi
 HOSTNAME=`hostname`
 if [ $HOSTNAME = "fliu-thinkpad" ];then
   source /home/fliu/.env > /dev/null
+  source /root/.pythonbrew/etc/bashrc
 else
   source /home/liufei/.env > /dev/null
+  source /usr/local/pythonbrew/etc/bashrc
 fi
-
-#source /root/.pythonbrew/etc/bashrc
-source /usr/local/pythonbrew/etc/bashrc
 
 RunAppOnce
 

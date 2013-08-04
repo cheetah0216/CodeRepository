@@ -142,6 +142,14 @@ nnoremap <silent> <F10> :set ic<CR>
 "代码折叠
 set foldmethod=syntax
 set foldlevel=100 " 启动 vim 时不要自动折叠代码
+let javaScript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
 
 "Tags
 if filereadable("tags")

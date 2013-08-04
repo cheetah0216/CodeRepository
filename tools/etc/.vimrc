@@ -39,6 +39,8 @@ Bundle 'vim-scripts/SuperTab'
 Bundle 'vim-scripts/echofunc.vim'
 
 "Lookupfile:输入部分的文件名，找到符合条件的工程中的文件.
+"依赖genutils
+Bundle 'vim-scripts/genutils'
 Bundle 'vim-scripts/lookupfile'
 
 "snipMate:提供快速生成代码段的功能.
@@ -52,6 +54,7 @@ Bundle 'vim-scripts/The-NERD-Commenter'
 
 "SingleCompile:单个文件编译执行,支持多种类型(c,c++,python,bash..)
 Bundle 'vim-scripts/SingleCompile'
+
 
 " Save workspace info
 function! SaveWorkSpace()

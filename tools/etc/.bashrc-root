@@ -106,7 +106,7 @@ else
   source /usr/local/pythonbrew/etc/bashrc
 fi
 
-RunAppOnce
+#RunAppOnce
 
 function extract()      # Handy Extract Program.
 {

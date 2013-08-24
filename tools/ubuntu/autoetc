@@ -28,6 +28,7 @@ Username=`sed -n '2p' $LF/.pwd | base64 -d`
 Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
 function etc-bak() {
+    git rm -rf $DirEtc/.vim
     for DirName in ${DirNameArr[@]}
     do
         if [ -d "$DirName" ]; then

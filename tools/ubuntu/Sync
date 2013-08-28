@@ -24,6 +24,7 @@ Env="$FLiu/.env"
 PrivateHosts="/etc/PrivateHosts"
 
 function etc_sync() {
+    echo "$CODE :"
     cd $CODE
     git pull 
     
@@ -41,8 +42,19 @@ function etc_sync() {
     cp PrivateHosts $PrivateHosts
 }
 
+function code_sync() {
+    echo "$BLOG :"
+    cd $BLOG
+    git pull
+
+    echo "$SHLIB :"
+    cd $SHLIB
+    git pull
+}
+
 function main() {
     etc_sync
+    code_sync
 }
 
 main

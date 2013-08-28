@@ -107,6 +107,7 @@ else
 fi
 
 #RunAppOnce
+source $SHLIB/env.sh
 
 function extract()      # Handy Extract Program.
 {

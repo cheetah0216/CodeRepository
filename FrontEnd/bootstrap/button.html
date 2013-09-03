@@ -1,0 +1,90 @@
+ 
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>bootstrap</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script>
+            $(function(){
+                var btn =  $("#example1")
+                btn.click(function(){
+                    btn.button('loading');
+                    setTimeout(function(){
+                        btn.button("reset")
+                    },1200)
+                })
+                new function(){
+                    var btn =  $("#example2")
+                    btn.click(function(){
+                        btn.button('complete');
+                        setTimeout(function(){
+                            btn.button("reset")
+                        },1200)
+                    })
+                }
+                new function(){
+                    var btn =  $("#example3")
+                    btn.click(function(){<form class="form-search">
+  <input type="text" class="input-medium search-query">
+  <button type="submit" class="btn">Search</button>
+</form>
+                        btn.button('error');
+                        setTimeout(function(){
+                            btn.button("reset")
+                        },1200)
+                    })
+                }
+                new function(){
+                    var btn =  $("#example4")
+                    btn.click(function(){
+                        btn.button('error');
+                        setTimeout(function(){
+                            btn.button("first")
+                        },600)
+                        setTimeout(function(){
+                            btn.button("second")
+                        },1600)
+                        setTimeout(function(){
+                            btn.button("third")
+                        },2400)
+                        setTimeout(function(){
+                            btn.button("reset")
+                        },3400)
+                    })
+                }
+            })
+
+             
+        </script>
+    </head>
+    <body>
+        <button type="button"  id="example1" class="btn  btn-primary" data-loading-text="加载中...">第一个按钮</button>
+        <button type="button"  id="example2" class="btn btn-info" data-complete-text="完成了..">换一个文本提示属性</button>
+        <button type="button"  id="example3" class="btn btn-error" data-error-text="出错了..">换另一个文本提示属性</button>
+        <button type="button"  id="example4" class="btn btn-success"
+                data-first-text="状态1.." data-second-text="状态2.." data-third-text="状态3..">同时有多个文本提示属性</button>
+        <p>点击切换示例，添加一个active类名</p>
+        <div>
+            <p>data-toggle="button"</p>
+            <button type="button" id="example5" class="btn btn-primary" data-toggle="button">这是单个按钮切换状态</button>
+        </div>
+        <p>data-toggle="buttons-checkbox"</p>
+        <div class="btn-group" data-toggle="buttons-checkbox">
+            <button type="button" class="btn btn-primary">Left</button>
+            <button type="button" class="btn btn-primary">Middle</button>
+            <button type="button" class="btn btn-primary">Right</button>
+        </div>
+        <p>data-toggle="buttons-radio"</p>
+        <div class="btn-group" data-toggle="buttons-radio">
+            <button type="button" class="btn btn-primary">Left</button>
+            <button type="button" class="btn btn-primary">Middle</button>
+            <button type="button" class="btn btn-primary">Right</button>
+        </div>
+    </body>
+</html>
+

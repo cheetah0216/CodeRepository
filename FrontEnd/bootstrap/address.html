@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>bootstrap学习 </title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
+    <script>
+      $(function(){
+        var btn =  $("#btn-search")
+        btn.click(function(){
+          btn.button('loading');
+          setTimeout(function(){
+            btn.button("reset")
+          },3000)
+        })
+      })
+    </script>
 
-<head>
-
-      <title>Bootstrap 101 Template</title>
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
 
     <style type="text/css">
-      body { background: #108A93; }
       body { background: #E7E7E7; }
     </style>
-        <button type="button"  id="example1" class="btn  btn-primary" data-loading-text="Load...">Hi,this is fliu!</button>
-
-    <form class="form-search">
-      <input type="text" class="input-medium search-query">
-    </form>
-      <button class="btn" id="btn-search" data-loading-text="Loading...">Search</button>
-
-
 
     <style>
       .pricing-table .plan {
@@ -126,6 +129,32 @@
       }
     </style>
 
+    <div class="row">
+      <div class="span12" style="text-align:right">
+        <Br> 
+        <Br> 
+        <Br> 
+        <Br> 
+        <Br> 
+        <Br> 
+        <Br> 
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12" style="text-align:center">
+        <input type="text" placeholder="Please enter the name of the employee:" class="input-xxlarge search-query"> 
+        <button type="button" id="btn-search" data-loading-text="loading..." class="btn">Search</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12" style="text-align:right">
+        <Br> 
+        <Br> 
+        <Br> 
+      </div>
+    </div>
 
     <div class="row-fluid pricing-table pricing-three-column">
       <div class="span4 plan">
@@ -163,7 +192,6 @@
       </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
   </body>
+
 </html>

@@ -69,6 +69,9 @@ UrlGoagnent="https://github.com/goagent/goagent.git"
 #install pythonbrew
 PythonbrewDependLibsArr=("build-essential" "libbz2-dev" "libsqlite3-dev" "zlib1g-dev" "libxml2-dev" "libxslt1-dev" "libreadline5" "libreadline5-dev" "libgdbm-dev" "libgdb-dev" "libxml2" "libssl-dev" "tk-dev" "libgdbm-dev" "libexpat1-dev" "libncursesw5-dev")
 
+#install redis
+UrlRedis="http://redis.io/download"
+
 ############
 function init_workspace() {
     for DirName in ${DirWorkSpaceArr[@]}
@@ -243,6 +246,26 @@ function install_bae_django_python() {
     #pip freeze
 }
 
+function install_redis() {
+    cd /tmp
+    wget -O redis.html $UrlRedis
+    url_redis_download=`cat redis.html | grep "wget" | awk '{ print $3}' | cut -d\& -f1`
+    rm redis.html
+    wget -O redis_stable.tar.gz $url_redis_download
+    mv redis_stable.tar.gz $SOFT 
+    cd $SOFT
+    mkdir tmp
+    mv redis_stable.tar.gz tmp
+    cd tmp
+    tar xzf redis_stable.tar.gz 
+    rm redis_stable.tar.gz
+    tmpRedisName=`ls -lrt |awk -F: '{print '}|tail -n1 | awk '{print $9}'`
+    mv -f $tmpRedisName $SOFT
+    cd $SOFT/$tmpRedisName
+    make
+    rm -R $SOFT/tmp
+}
+
 function main() {
     #init_workspace
     #install_prerequisite_soft
@@ -254,8 +277,9 @@ function main() {
     #install_PDFXCview
     #install_standard_eclipse
     #install_goagnent
-    install_pythonbrew
-    install_bae_django_python
+    #install_pythonbrew
+    #install_bae_django_python
+    install_redis
 }
 
 main

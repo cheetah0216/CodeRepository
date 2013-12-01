@@ -264,6 +264,14 @@ function install_redis() {
     cd $SOFT/$tmpRedisName
     make
     rm -R $SOFT/tmp
+    cd $SOFT/$tmpRedisName/src
+    cp redis-server /usr/local/bin/
+    cp redis-cli /usr/local/bin/
+    mkdir /etc/redis
+    mkdir /var/redis
+    cp $SOFT/$tmpRedisName/utils/redis_init_script /etc/init.d/redis_6379
+    cd $SOFT/$tmpRedisName && cp redis.conf /etc/redis/6379.conf
+    mkdir /var/redis/6379
 }
 
 function main() {

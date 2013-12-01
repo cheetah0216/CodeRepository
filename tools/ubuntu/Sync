@@ -50,6 +50,10 @@ function code_sync() {
     echo "$SHLIB :"
     cd $SHLIB
     git pull
+
+    echo "$AUTOBCT :"
+    cd $AUTOBCT
+    git pull
 }
 
 function main() {

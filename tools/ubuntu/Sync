@@ -27,11 +27,12 @@ PrivateHosts="/etc/PrivateHosts"
 PathSync=$UBUNTU"/Sync"
 
 function update_sync() {
-    echo "etc_sync :"
+    echo "=================etc_sync :"
     etc_sync
 
     export SYNCUPDATE="TRUE"
     source $PathSync
+    exit
 }
 
 function etc_sync() {
@@ -56,6 +57,7 @@ function etc_sync() {
 }
 
 function code_sync() {
+    echo "=================code_sync :"
     echo "$BLOG :"
     cd $BLOG
     git pull
@@ -72,7 +74,7 @@ function code_sync() {
 }
 
 function main() {
-    echo "Start Sync"
+    echo "===========================Start Sync========================="
     if [[ $SYNCUPDATE == "FALSE" ]]; then
         update_sync
     fi

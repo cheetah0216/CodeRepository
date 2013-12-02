@@ -23,6 +23,17 @@ GitIgnore="/root/.gitignore"
 Env="$FLiu/.env"
 PrivateHosts="/etc/PrivateHosts"
 
+## 
+PathSync=$UBUNTU"/Sync"
+
+function update_sync() {
+    echo "etc_sync :"
+    etc_sync
+
+    export SYNCUPDATE="TRUE"
+    source $PathSync
+}
+
 function etc_sync() {
     echo "$CODE :"
     cd $CODE
@@ -40,6 +51,8 @@ function etc_sync() {
     cp .gitignore   $GitIgnore
     cp .env         $Env
     cp PrivateHosts $PrivateHosts
+
+    source $FLiu/.env
 }
 
 function code_sync() {
@@ -57,7 +70,9 @@ function code_sync() {
 }
 
 function main() {
-    etc_sync
+    if [[ $SYNCUPDATE == "FALSE" ]]; then
+        update_sync
+    fi
     code_sync
 }
 

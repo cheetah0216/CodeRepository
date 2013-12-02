@@ -67,13 +67,19 @@ function code_sync() {
     echo "$AUTOBCT :"
     cd $AUTOBCT
     git pull
+
+    export $CODEUPDATE="TRUE"
 }
 
 function main() {
+    echo "Start Sync"
     if [[ $SYNCUPDATE == "FALSE" ]]; then
         update_sync
     fi
-    code_sync
+    
+    if [[ $CODEUPDATE == "FALSE" ]]; then
+        code_sync
+    fi
 }
 
 main

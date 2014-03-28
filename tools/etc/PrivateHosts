@@ -7,3 +7,14 @@
 10.115.242.233 marketing-hub
 10.80.1.157 sandglass.cnt01.local
 10.115.244.186 il-tlv-cts
+
+#google
+173.194.112.222 ssl.google-analytics.com
+173.194.116.195 apis.google.com
+
+#github 
+185.31.17.185 github.global.ssl.fastly.net
+185.31.17.133 collector-cdn.github.com
+
+#stackoverflow
+190.93.247.58 sstatic.net.cdn.cloudflare.net

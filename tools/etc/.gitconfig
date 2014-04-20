@@ -4,4 +4,4 @@
 [credential]
 	helper = cache --timeout=3600
 [core]
-	excludesfile = /Users/fliu/.gitignore
+	excludesfile = .gitignore

@@ -126,6 +126,6 @@ function git-push() {
 }
 mv-vim-git
 etc-bak
-#git-push
+git-push
 restore-vim-git
 

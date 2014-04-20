@@ -67,6 +67,14 @@ function restore-vim-git() {
 
 function etc-bak() {
     #git rm -rf $DirEtc/.vim
+    
+    if [[ ! -d "$DirEtcUbuntu" ]]; then
+      mkdir -p "$DirEtcUbuntu"
+    fi
+    if [[ ! -d "$DirEtcOSX" ]]; then
+      mkdir -p "$DirEtcOSX"
+    fi
+
     for DirName in ${DirNameArr[@]}
     do
         if [ -d "$DirName" ]; then

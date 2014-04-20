@@ -30,6 +30,7 @@
 # Vim tmp
 *~
 *.swp
+*.cnx
 
 # WorkSpace
 *.files

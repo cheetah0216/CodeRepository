@@ -49,13 +49,13 @@ function mv-vim-git() {
   vimGitDesArr=(${vimGitDes// / })
 
   for (( i = 0 ; i < ${#vimGitSrcArr[@]} ; i++ )) do
-    mv -rf "${vimGitSrcArr[$i]}" "${vimGitDesArr[$i]}"
+    mv "${vimGitSrcArr[$i]}" "${vimGitDesArr[$i]}"
   done
 }
 
 function restore-vim-git() {
   for (( i = 0 ; i < ${#vimGitDesArr[@]} ; i++ )) do
-    mv -rf "${vimGitDesArr[$i]}" "${vimGitSrcArr[$i]}"
+    mv "${vimGitDesArr[$i]}" "${vimGitSrcArr[$i]}"
   done
 
   if [[ -d $vimGitDesDir ]]; then

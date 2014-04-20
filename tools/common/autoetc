@@ -35,27 +35,29 @@ DirEtcOSX=$ETC"/osx"
 Username=`sed -n '2p' $LF/.pwd | base64 -d`
 Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
-vimGitDesDir=""
+vimGitDesDir=$LF"/.vim_tmp"
 vimGitSrc=""
 function mv-vim-git() {
-  vimGitDesDir=$LF"/.vim_tmp"
-  if [[ ! -d $vimGitDesDir ]]; then
-  		mkdir -p $vimGitDesDir
-  fi
-
   vimGitSrc=`find $DirVim -type d -name ".git"`
+  vimGitSrcX=${vimGitSrc//\/.git//}
   vimGitDes=${vimGitSrc//.vim\//.vim_tmp\/}
+  vimGitDesX=${vimGitDes//\/.git//}
   vimGitSrcArr=(${vimGitSrc// / })
+  vimGitSrcArrX=(${vimGitSrcX// / })
   vimGitDesArr=(${vimGitDes// / })
+  vimGitDesArrX=(${vimGitDesX// / })
 
   for (( i = 0 ; i < ${#vimGitSrcArr[@]} ; i++ )) do
-    mv "${vimGitSrcArr[$i]}" "${vimGitDesArr[$i]}"
+    if [[ ! -d "${vimGitDesArrX[$i]}" ]]; then
+    		mkdir -p "${vimGitDesArrX[$i]}"
+    fi
+    mv "${vimGitSrcArr[$i]}" "${vimGitDesArrX[$i]}"
   done
 }
 
 function restore-vim-git() {
   for (( i = 0 ; i < ${#vimGitDesArr[@]} ; i++ )) do
-    mv "${vimGitDesArr[$i]}" "${vimGitSrcArr[$i]}"
+    mv "${vimGitDesArr[$i]}" "${vimGitSrcArrX[$i]}"
   done
 
   if [[ -d $vimGitDesDir ]]; then
@@ -116,6 +118,6 @@ function git-push() {
 }
 mv-vim-git
 etc-bak
-git-push
+#git-push
 restore-vim-git
 

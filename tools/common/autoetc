@@ -2,6 +2,7 @@
 
 echo "*************************autoetc********************" >> $LF/.lflog
 
+$MyOS=`name`
 #set etc files dir
 if [ $MyOS == "Darwin" ]; then
   DirVim=$LF/.vim

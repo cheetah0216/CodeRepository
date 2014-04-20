@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+echo "*************************autoetc********************" >> $LF/.lflog
+
+#set etc files dir
+if [ $MyOS == "Darwin" ]; then
+  DirVim=$LF/.vim
+  Vimrc=$LF/.vimrc
+  GitConf=$LF/.gitconfig
+  GitIgnore=$LF/.gitignore
+
+  NutStore=$LF"/Nutstore/config"
+else
+  DirVim=/root/.vim
+  Vimrc=/root/.vimrc
+  RootBashrc=/root/.bashrc
+  HomeBashrc=$LF/.bashrc
+  GitConf=/root/.gitconfig
+  GitIgnore=/root/.gitignore
+
+  NutStore=""
+fi
+Env=$LF/.env
+PrivateHosts=/etc/PrivateHosts
+PwdFiles=$LF/.pwd
+
+DirNameArr=("$DirVim")
+FileNameArr=("$Vimrc" "$GitConf" "$GitIgnore" "$Env" "$PrivateHosts")
+
+DirEtc=$ETC
+DirEtcUbuntu=$ETC"/ubuntu"
+DirEtcOSX=$ETC"/osx"
+
+Username=`sed -n '2p' $LF/.pwd | base64 -d`
+Password=`sed -n '3p' $LF/.pwd | base64 -d`
+
+function etc-bak() {
+    #git rm -rf $DirEtc/.vim
+    for DirName in ${DirNameArr[@]}
+    do
+        if [ -d "$DirName" ]; then
+            cp -R "$DirName" "$DirEtc"
+        fi
+    done
+
+    if [ $MyOS != "Darwin" ]; then
+      if [ -f "$RootBashrc" ]; then
+         cp "$RootBashrc" "$DirEtcUbuntu""/.bashrc-root"
+      fi
+
+      if [ -f "$HomeBashrc" ]; then
+         cp "$HomeBashrc" "$DirEtcUbuntu""/.bashrc-home"
+      fi
+    fi
+
+    for FileName in ${FileNameArr[@]}
+    do
+        cp "$FileName" "$DirEtc"
+    done
+
+    if [ -f "$PwdFiles" ]; then
+      cp "$PwdFiles" "$NutStore""/pwd" 
+    fi
+}
+
+function git-push() {
+    cd $CODE
+    echo `date` >> $LF/.lflog
+    echo "$Hostname: $CODE git-pull." >> $LF/.lflog
+    git pull >> $LF/.lflog
+    echo "$Hostname: $CODE git-push." >> $LF/.lflog
+    git add .
+    git status >> $LF/.lflog
+    echo "`date`: autoetc-->commit" >> $LF/.lflog
+    git commit -m "`date`: autoetc."
+    echo "`date`: autoetc-->push" >> $LF/.lflog
+
+        local str=$(expect -c "
+            spawn git push origin master
+            expect {
+                -re "sername" { send \"$Username\r\"; exp_continue }
+                -re "assword" { send \"$Password\r\"; }
+          }
+            interact
+        ")
+        echo "$str" >> $LF/.lflog
+}
+etc-bak
+git-push
+

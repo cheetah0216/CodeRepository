@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+MyOS=`uname`
+ProDir=`pwd`
+PathDir="set path+=""$ProDir""/**"
+#create tags file
+find . -type f > cscope.files
+ctags --fields=+lS -L cscope.files
+
+#create cscope file
+cscope -bq
+
+# generate tag file for lookupfile plugin
+echo -e "!_TAG_FILE_SORTED\t2\t/2=foldcase/" > filenametags
+if [ $MyOS == "Darwin" ]; then
+  gfind . -not -regex '.*\.\(png\|gif\)' -type f -printf "%f\t%p\t1\n" | \
+    sort -f >> filenametags 
+else
+  find . -not -regex '.*\.\(png\|gif\)' -type f -printf "%f\t%p\t1\n" | \
+    sort -f >> filenametags 
+fi
+
+#create workspace.vim
+cat <<WORKSPACE >workspace.vim
+"Path
+$PathDir
+
+"session
+if filereadable("session.vim")
+  source session.vim
+endif
+if filereadable("session.viminfo")
+  rviminfo session.viminfo
+endif
+
+"ctags
+if filereadable("tags")
+  set tags=tags
+endif
+
+"cscope
+if has("cscope")
+  set csprg=cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+    cs add cscope.out
+  endif
+  set csverb
+endif
+
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+WORKSPACE
+

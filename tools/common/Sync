@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+MyOS=`uname`
+DirGithub="$LF/github"
+
+## Set Vim 
+DirVimConf=$DirGithub"/CodeRepository/tools/etc/.vim"
+VimProfile=$DirGithub"/CodeRepository/tools/etc/.vimrc"
+
+## Set Proflie
+DirSource=$DirGithub"/CodeRepository/tools/etc/"
+DirUbuntu=$DirGithub"/CodeRepository/tools/etc/ubuntu/"
+DirOSX=$DirGithub"/CodeRepository/tools/etc/osx/"
+
+if [ $MyOS == "Darwin" ]; then
+  GitConf="$LF/.gitconfig"
+  GitIgnore="$LF/.gitignore"
+else
+  RootBashrc="/root/.bashrc"
+  HomeBashrc="$LF/.bashrc"
+  GitConf="/root/.gitconfig"
+  GitIgnore="/root/.gitignore"
+fi
+
+Env="$LF/.env"
+PrivateHosts="/etc/PrivateHosts"
+
+## 
+PathSync=$UBUNTU"/Sync"
+
+function update_sync() {
+    echo "=================etc_sync :"
+    etc_sync
+
+    export SYNCUPDATE="TRUE"
+    source $PathSync
+    exit
+}
+
+function etc_sync() {
+    echo "$CODE :"
+    cd $CODE
+    git pull 
+    
+    cp -Rf $DirVimConf /root
+    cp -Rf $DirVimConf $LF
+    cp $VimProfile /root
+    cp $VimProfile $LF
+
+    cd $DirSource 
+    cp .bashrc-root $RootBashrc
+    cp .bashrc-home $HomeBashrc
+    cp .gitconfig   $GitConf
+    cp .gitignore   $GitIgnore
+    cp .env         $Env
+    cp PrivateHosts $PrivateHosts
+
+    source $LF/.env
+}
+
+function code_sync() {
+    echo "=================code_sync :"
+    echo "$BLOG :"
+    cd $BLOG
+    git pull
+
+    echo "$SHLIB :"
+    cd $SHLIB
+    git pull
+
+    echo "$AUTOBCT :"
+    cd $AUTOBCT
+    git pull
+
+    export $CODEUPDATE="TRUE"
+}
+
+function main() {
+    echo "===========================Start Sync========================="
+    if [[ $SYNCUPDATE == "FALSE" ]]; then
+        update_sync
+    fi
+    
+    if [[ $CODEUPDATE == "FALSE" ]]; then
+        code_sync
+    fi
+}
+
+main

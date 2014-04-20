@@ -35,6 +35,34 @@ DirEtcOSX=$ETC"/osx"
 Username=`sed -n '2p' $LF/.pwd | base64 -d`
 Password=`sed -n '3p' $LF/.pwd | base64 -d`
 
+vimGitDesDir=""
+vimGitSrc=""
+function mv-vim-git() {
+  vimGitDesDir=$LF"/.vim_tmp"
+  if [[ ! -d $vimGitDesDir ]]; then
+  		mkdir -p $vimGitDesDir
+  fi
+
+  vimGitSrc=`find $DirVim -type d -name ".git"`
+  vimGitDes=${vimGitSrc//.vim\//.vim_tmp\/}
+  vimGitSrcArr=(${vimGitSrc// / })
+  vimGitDesArr=(${vimGitDes// / })
+
+  for (( i = 0 ; i < ${#vimGitSrcArr[@]} ; i++ )) do
+    mv -rf "${vimGitSrcArr[$i]}" "${vimGitDesArr[$i]}"
+  done
+}
+
+function restore-vim-git() {
+  for (( i = 0 ; i < ${#vimGitDesArr[@]} ; i++ )) do
+    mv -rf "${vimGitDesArr[$i]}" "${vimGitSrcArr[$i]}"
+  done
+
+  if [[ -d $vimGitDesDir ]]; then
+  		rm -rf $vimGitDesDir
+  fi
+}
+
 function etc-bak() {
     #git rm -rf $DirEtc/.vim
     for DirName in ${DirNameArr[@]}
@@ -86,6 +114,8 @@ function git-push() {
         ")
         echo "$str" >> $LF/.lflog
 }
+mv-vim-git
 etc-bak
 git-push
+restore-vim-git
 

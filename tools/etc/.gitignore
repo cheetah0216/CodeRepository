@@ -44,7 +44,7 @@ filenametags
 *.lf
 *.bak
 *.tmp
-.git
+.git/*
 
 # Python
 *.pyc

@@ -1,32 +1,26 @@
 #!/usr/bin/env bash
 
-MyOS=`uname`
-DirGithub="$LF/github"
+DirEtc=$ETC
+DirEtcUbuntu=$ETC"/ubuntu"
+DirEtcOSX=$ETC"/osx"
 
-## Set Vim 
-DirVimConf=$DirGithub"/CodeRepository/tools/etc/.vim"
-VimProfile=$DirGithub"/CodeRepository/tools/etc/.vimrc"
-
-## Set Proflie
-DirSource=$DirGithub"/CodeRepository/tools/etc/"
-DirUbuntu=$DirGithub"/CodeRepository/tools/etc/ubuntu/"
-DirOSX=$DirGithub"/CodeRepository/tools/etc/osx/"
-
+## etc files
+DirVim=$DirEtc"/.vim"
+Vimrc=$DirEtc"/.vimrc"
+GitConf=$DirEtc"/.gitconfig"
+GitIgnore=$DirEtc"/.gitignore"
+RootBashrc=$DirEtc"/.bashrc-root"
+Homebashrc=$DirEtc"/.bashrc-home"
+Env=$DirEtc"/.env"
+PrivateHosts=$DirEtc"/PrivateHosts"
 if [ $MyOS == "Darwin" ]; then
-  GitConf="$LF/.gitconfig"
-  GitIgnore="$LF/.gitignore"
+  PwdFiles=$LF"/Nutstore/config/pwd"
 else
-  RootBashrc="/root/.bashrc"
-  HomeBashrc="$LF/.bashrc"
-  GitConf="/root/.gitconfig"
-  GitIgnore="/root/.gitignore"
+  PwdFiles=""
 fi
 
-Env="$LF/.env"
-PrivateHosts="/etc/PrivateHosts"
-
 ## 
-PathSync=$UBUNTU"/Sync"
+PathSync=$COMMON"/Sync"
 
 function update_sync() {
     echo "=================etc_sync :"
@@ -42,18 +36,22 @@ function etc_sync() {
     cd $CODE
     git pull 
     
-    cp -Rf $DirVimConf /root
-    cp -Rf $DirVimConf $LF
-    cp $VimProfile /root
-    cp $VimProfile $LF
+    cp -Rf $DirVim $LF
+    cp $Vimrc $LF
+    cp $GitConf $LF
+    cp $GitIgnore $LF
+    cp $Env $LF
+    cp $PrivateHosts $LF"/.PrivateHosts"
+    cp $PwdFiles $LF"/.pwd"
 
-    cd $DirSource 
-    cp .bashrc-root $RootBashrc
-    cp .bashrc-home $HomeBashrc
-    cp .gitconfig   $GitConf
-    cp .gitignore   $GitIgnore
-    cp .env         $Env
-    cp PrivateHosts $PrivateHosts
+    if [ $MyOS != "Darwin" ]; then
+      cp -Rf $DirVim /root
+      cp $Vimrc /root
+      cp $GitConf /root
+      cp $GitIgnore /root
+      cp $RootBashrc /root
+      cp $HomeBashrc $LF
+    fi
 
     source $LF/.env
 }
@@ -70,6 +68,10 @@ function code_sync() {
 
     echo "$AUTOBCT :"
     cd $AUTOBCT
+    git pull
+
+    echo "$ITOOLS :"
+    cd $ITOOLS
     git pull
 
     export $CODEUPDATE="TRUE"

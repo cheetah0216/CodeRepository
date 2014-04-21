@@ -10,6 +10,7 @@ hostName = socket.gethostname()
 sysInfo = platform.system()
 strDes = ""
 strUser = ""
+strfliu = os.environ['LF']
 
 def UsePlatform():
   global sysInfo
@@ -18,9 +19,9 @@ def UsePlatform():
   if(sysInfo == "Windows"):
     strDes = "C:\Windows\System32\drivers\etc\hosts"
     strUser = "C:\Windows\System32\drivers\etc\PrivateHosts"
-  if(sysInfo == "Linux"):
+  if(sysInfo == "Linux" || sysInfo == "Darwin"):
     strDes = "/etc/hosts"
-    strUser = "/etc/PrivateHosts"
+    strUser = strflu + "/.PrivateHosts"
   if(os.path.exists(strUser) == False):
     files = open(strUser, "w")
     files.write("")
@@ -31,6 +32,9 @@ def LinuxPlatform(strDir):
   for line in fileinput.input(strDir, inplace=1):
     line = line.replace(replaceStr, hostName)   
     sys.stdout.write(line)
+
+def OSXPlatform(strDie):
+  
 
 def WriteHosts():
   global strDes
@@ -60,6 +64,8 @@ def main():
   # support linux platform
   if(sysInfo == "Linux"):
     LinuxPlatform(strDes)
+  if(sysInfo == "Darwin"):
+    OSXPlatform(strDes)
 
 if __name__ == "__main__":
   main()

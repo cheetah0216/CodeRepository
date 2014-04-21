@@ -22,7 +22,7 @@ else
   NutStore=""
 fi
 Env=$LF/.env
-PrivateHosts=/etc/PrivateHosts
+PrivateHosts=$LF/.PrivateHosts
 PwdFiles=$LF/.pwd
 
 DirNameArr=("$DirVim")

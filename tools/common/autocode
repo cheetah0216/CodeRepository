@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+urlCode="https://github.com/cheetah0216/CodeRepository.git"
+urlBlog="https://github.com/cheetah0216/cheetah0216.github.com.git"
+urlShlib="https://github.com/cheetah0216/shlib.git"
+urliTools="https://github.com/cheetah0216/iTools.git"
+urlAutoBCT="https://github.com/cheetah0216/AutoBCT.git"
+
+gitCodeArr=(
+  "$urlCode" "$urlBlog" "$urlShlib"
+  "$urliTools" "$urlAutoBCT" 
+)
+
+function clone_code(){
+  cd $GITHUB
+  local url=$1
+  local gitDir=${url##*/}
+  local gitDir=${gitDir%.*}
+  if [[ ! -d "$gitDir" ]]; then
+    git clone $url
+  fi
+}
+
+function main(){
+  for url in ${gitCodeArr[@]}
+  do
+    clone_code $url
+  done
+}
+
+main

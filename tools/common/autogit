@@ -16,15 +16,15 @@ function check-arg() {
 }
 
 function git-push() {
-    echo `date` >> /root/.lflog
-    echo "$Hostname: $CurrentDir git-pull." >> /root/.lflog
-    git pull >> /root/.lflog
-    echo "$Hostname: $CurrentDir git-push." >> /root/.lflog
+    echo `date` >> $LF/.lflog
+    echo "$Hostname: $CurrentDir git-pull." >> $LF/.lflog
+    git pull >> $LF/.lflog
+    echo "$Hostname: $CurrentDir git-push." >> $LF/.lflog
     git add .
-    git status >> /root/.lflog
-    echo "`date`: autogit-->commit" >> /root/.lflog
+    git status >> $LF/.lflog
+    echo "`date`: autogit-->commit" >> $LF/.lflog
     git commit -m "$ComInfo"
-    echo "`date`: autogit-->push" >> /root/.lflog
+    echo "`date`: autogit-->push" >> $LF/.lflog
     
         local str=$(expect -c "
             spawn git push origin master
@@ -34,7 +34,7 @@ function git-push() {
           }
             interact
         ")
-        echo "$str" >> /root/.lflog
+        echo "$str" >> $LF/.lflog
 }
 
 check-arg

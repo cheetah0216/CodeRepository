@@ -12,7 +12,7 @@ GitIgnore=$DirEtc"/.gitignore"
 RootBashrc=$DirEtc"/.bashrc-root"
 Homebashrc=$DirEtc"/.bashrc-home"
 Env=$DirEtc"/.env"
-PrivateHosts=$DirEtc"/PrivateHosts"
+PrivateHosts=$DirEtc"/.PrivateHosts"
 if [ $MyOS == "Darwin" ]; then
   PwdFiles=$LF"/Nutstore/config/pwd"
 else

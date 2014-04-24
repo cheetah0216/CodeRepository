@@ -7,6 +7,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
+#include <algorithm>
+
 using namespace std;
 
 class TextQuery{

@@ -56,16 +56,77 @@ void textquery_test(ifstream &infile)
   }
 }
 
-void query_test(ifstream &infile)
+void query_word_test(TextQuery &tq, string s)
 {
-  TextQuery tq;
-  tq.read_file(infile);
-  Query andq = Query("hair") & Query("Alice");
-  //Query andq = ~Query("hair");
-  string ands = "hair | Alice";
-  cout << "Query for: " << andq << endl;
-  set<TextQuery::line_no> result = andq.eval(tq);
-  print_result(result, ands, tq);
+  Query q1 = Query(s);
+  string s1 = s;
+  set<TextQuery::line_no> result1 = q1.eval(tq);
+  print_result(result1, s1, tq);
+  cout << "Query for: " << q1 << endl;
+}
+
+void query_not_test(TextQuery &tq, string s)
+{
+  Query q1 = ~Query(s);
+  string s1 = "~"+s;
+  set<TextQuery::line_no> result1 = q1.eval(tq);
+  print_result(result1, s1, tq);
+  cout << "Query for: " << q1 << endl;
+}
+
+void query_binary_test(TextQuery &tq, string oper)
+{
+
+  Query q1 = Query("hair");
+  string s1 = "hair";
+  //set<TextQuery::line_no> result1 = q1.eval(tq);
+  //print_result(result1, s1, tq);
+
+  Query q2 = Query("Alice");
+  string s2 = "Alice";
+  //set<TextQuery::line_no> result2 = q2.eval(tq);
+  //print_result(result2, s2, tq);
+
+  if( oper == "&")
+  {
+    Query andq = q1 & q2;
+    string ands = "hair & Alice";
+    set<TextQuery::line_no> result = andq.eval(tq);
+    print_result(result, ands, tq);
+    cout << "Query for: " << andq << endl;
+  }
+  if( oper == "|")
+  {
+    Query orq = q1 | q2;
+    string ors = "hair | Alice";
+    set<TextQuery::line_no> result = orq.eval(tq);
+    print_result(result, ors, tq);
+    cout << "Query for: " << orq << endl;
+  }
+}
+
+void query_mul_test(TextQuery &tq)
+{
+  Query q1 = Query("fiery");
+  string s1 = "hair";
+  //set<TextQuery::line_no> result1 = q1.eval(tq);
+  //print_result(result1, s1, tq);
+
+  Query q2 = Query("bird");
+  string s2 = "bird";
+  //set<TextQuery::line_no> result2 = q2.eval(tq);
+  //print_result(result2, s2, tq);
+  
+  Query q3 = Query("wind");
+  string s3 = "wind";
+  //set<TextQuery::line_no> result3 = q3.eval(tq);
+  //print_result(result3, s3, tq);
+
+  Query mulq = (q1 & q2) | q3;
+  string muls = "(fiery & bird) | wind";
+  set<TextQuery::line_no> result = mulq.eval(tq);
+  print_result(result, muls, tq);
+  cout << "Query for: " << mulq << endl;
 }
 
 int main(int argc, char **argv)
@@ -78,7 +139,28 @@ int main(int argc, char **argv)
   }
 
   //textquery_test(infile);
-  query_test(infile);
+  TextQuery tq;
+  tq.read_file(infile);
+
+  cout << "================================================" << endl;
+  cout << "Query(\"Daddy\"):" << endl;
+  query_word_test(tq,"Daddy");
+
+  cout << "================================================" << endl;
+  cout << "~Query(\"Alice\"):" << endl;
+  query_not_test(tq,"Alice");
+
+  cout << "================================================" << endl;
+  cout << "Query(\"hair\") | Query(\"Alice\"):" << endl;
+  query_binary_test(tq,"|");
+
+  cout << "================================================" << endl;
+  cout << "Query(\"hair\") & Query(\"Alice\"):" << endl;
+  query_binary_test(tq,"&");
+
+  cout << "================================================" << endl;
+  cout << "(Query(\"fiery\") & Query(\"bird\")) | Query(\"wind\"):" << endl;
+  query_mul_test(tq);
   return 0;
 }
 

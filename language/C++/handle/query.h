@@ -59,7 +59,10 @@ class Query {
         return q->eval(t);
       }
     ostream &display(ostream &os) const
-      { cout << "Query::display()" << endl; return q->display(os); }
+      { 
+        cout << "Query::display()" << endl; 
+        return q->display(os); 
+      }
 
   private:
     void decr_use();
@@ -129,7 +132,7 @@ class BinaryQuery: public Query_base {
     ostream& display(ostream &os) const
       { 
         cout << "BinaryQuery::display()_" << oper << endl;
-        os << "(" << lhs << " " << oper << " " << rhs << ")"; 
+        return os << "(" << lhs << " " << oper << " " << rhs << ")"; 
       }
     const Query lhs, rhs;
     const string oper;
@@ -145,9 +148,32 @@ class AndQuery: public BinaryQuery{
 set<TextQuery::line_no> AndQuery::eval(const TextQuery& file) const
 {
   cout << "AndQuery::eval()" << endl;
-  set<TextQuery::line_no> right = rhs.eval(file);
-  set<TextQuery::line_no> ret_lines = lhs.eval(file);
-  ret_lines.insert(right.begin(), right.end());
+  set<line_no> left = lhs.eval(file);
+  /*
+  set<line_no>::const_iterator it;
+  for(it = left.begin(); it != left.end(); it++)
+  {
+    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
+  }
+  */
+  set<line_no> right = rhs.eval(file);
+  /*
+  for(it = right.begin(); it != right.end(); it++)
+  {
+    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
+  }
+
+  */
+  set<line_no> ret_lines;
+  set_intersection(left.begin(), left.end(),
+                  right.begin(), right.end(),
+                  inserter(ret_lines, ret_lines.begin()));
+  /*
+  for(it = ret_lines.begin(); it != ret_lines.end(); it++)
+  {
+    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
+  }
+  */
   return ret_lines;
 }
 
@@ -161,27 +187,10 @@ class OrQuery: public BinaryQuery{
 set<TextQuery::line_no> OrQuery::eval(const TextQuery& file) const
 {
   cout << "OrQuery::eval()" << endl;
-  set<line_no> left = lhs.eval(file);
-  set<line_no>::const_iterator it;
-  for(it = left.begin(); it != left.end(); it++)
-  {
-    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
-  }
-
-  set<line_no> right = rhs.eval(file);
-  for(it = right.begin(); it != right.end(); it++)
-  {
-    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
-  }
-
-  set<line_no> ret_lines;
-  set_intersection(left.begin(), left.end(),
-                  right.begin(), right.end(),
-                  inserter(ret_lines, ret_lines.begin()));
-  for(it = ret_lines.begin(); it != ret_lines.end(); it++)
-  {
-    cout << (*it)+1 << ":" << file.text_line(*it) << endl;
-  }
+  set<TextQuery::line_no> right = rhs.eval(file);
+  set<TextQuery::line_no> ret_lines = lhs.eval(file);
+  ret_lines.insert(right.begin(), right.end());
+  return ret_lines;
 }
 
 inline Query operator&(const Query &lhs, const Query &rhs)

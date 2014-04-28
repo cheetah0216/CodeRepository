@@ -7,10 +7,12 @@ class Sales_item {
     friend inline bool operator== (const Sales_item&,const Sales_item&);
   public:
     Sales_item(): units_sold(0), revenue(0.0) {}
+    ~Sales_item() {}
 
     double avg_price() const;
     bool same_isbn(const Sales_item &rhs) const;
     Sales_item& operator+=(const Sales_item&);
+    Sales_item& operator=(const Sales_item&);
 
   private:
     string isbn;
@@ -35,6 +37,14 @@ Sales_item& Sales_item::operator+=(const Sales_item& rhs)
 {
   units_sold += rhs.units_sold;
   revenue += rhs.revenue;
+  return *this;
+}
+
+Sales_item& Sales_item::operator=(const Sales_item& rhs)
+{
+  isbn = rhs.isbn;
+  units_sold = rhs.units_sold;
+  revenue = rhs.revenue;
   return *this;
 }
 

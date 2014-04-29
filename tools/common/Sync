@@ -13,7 +13,8 @@ RootBashrc=$DirEtc"/.bashrc-root"
 Homebashrc=$DirEtc"/.bashrc-home"
 Env=$DirEtc"/.env"
 PrivateHosts=$DirEtc"/.PrivateHosts"
-if [ $MyOS == "Darwin" ]; then
+
+if [ $MyOS = "Darwin" ]; then
   PwdFiles=$LF"/Nutstore/config/pwd"
 else
   PwdFiles=""
@@ -79,11 +80,11 @@ function code_sync() {
 
 function main() {
     echo "===========================Start Sync========================="
-    if [[ $SYNCUPDATE == "FALSE" ]]; then
+    if [[ $SYNCUPDATE = "FALSE" ]]; then
         update_sync
     fi
     
-    if [[ $CODEUPDATE == "FALSE" ]]; then
+    if [[ $CODEUPDATE = "FALSE" ]]; then
         code_sync
     fi
 }

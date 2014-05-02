@@ -23,6 +23,7 @@ Item_base* Item_base::clone() const
 {
   return new Item_base(*this);
 }
+
 double Item_base::net_price(size_t n) const
 {
   return n * price;

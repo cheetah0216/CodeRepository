@@ -139,8 +139,8 @@ set hls                   "高亮查找文本
 "set autoindent            "自动缩进
 set smartindent
 set expandtab             "以下三个配置配合使用，设置tab和缩进空格数
-set sw=2                  "自动缩进的时候,缩进尺寸为2个空格。
-set ts=2                  "Tab 宽度为 2 个字符。
+set sw=4                  "自动缩进的时候,缩进尺寸为2个空格。
+set ts=4                  "Tab 宽度为 2 个字符。
 set et                    "编辑时将所有Tab替换为空格。 
 set sm                    "显示括号配对情况。
 set cursorline            "为光标所在行加下划线

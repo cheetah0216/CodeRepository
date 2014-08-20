@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function main(){
+    input_file=$1
+    start_time=$2
+    end_time=$3
+    mp4_name="$4"".mp4"
+    mp3_name="$4"".mp3"
+
+    ffmpeg -ss $2 -t $3 -i $1 -acodec copy  -vcodec copy $mp4_name 1>/dev/null 2>&1 
+    ffmpeg -i $mp4_name -b:a 256K -vn $mp3_name 1>/dev/null 2>&1
+
+    rm $mp4_name
+}
+
+main $1 $2 $3 $4
+

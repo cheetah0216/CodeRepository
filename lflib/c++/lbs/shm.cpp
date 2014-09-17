@@ -68,7 +68,7 @@ void create_rtree()
     uint64_t starttime;
     starttime = get_microstamp();
 
-    for(int i = 0; i < 1000000; i++){
+    for(int i = 0; i < 1000; i++){
         posx = get_randnum(9000001);
         posy = get_randnum(18000001); 
         //std::cout << i << ": " << posx << "," << posy << std::endl;
@@ -84,6 +84,24 @@ void create_rtree()
 
     uint64_t endtime = get_microstamp();
     std::cout << "create rtree time:" << (endtime - starttime) << "ms" << std::endl;
+}
+
+void test_point()
+{
+    uint64_t starttime;
+    starttime = get_microstamp();
+ 
+    point p(7092605, 16092663);
+    std::vector<value> result_s;
+    rtree->query(bgi::within(p), std::back_inserter(result_s));
+
+    uint64_t endtime = get_microstamp();
+    std::cout << "time:" << (endtime - starttime) << "ms" << std::endl;
+    std::cout << "spatial query result:" << std::endl;
+    std::cout << "total: " << result_s.size() << std::endl;
+    BOOST_FOREACH(value const& v, result_s)
+        std::cout << bg::wkt<point>(v.first) << " - " << v.second << std::endl;
+
 }
 
 void test_range()
@@ -124,14 +142,14 @@ void test_near()
 
 int main()
 {
-
-    bi::managed_mapped_file file(bi::open_or_create, "data.bin", 500 * 1024*1024);
+    bi::managed_mapped_file file(bi::open_or_create, "data.bin", 1024*1024);
     alloc ac(file.get_segment_manager());
 	rtree = file.find_or_construct<Rtree>("rtree")(par(), idx(), eq(), ac);
 
-    create_rtree();    
+	create_rtree();    
     test_range();
     test_near();
+    test_point();
 
     return 0;
 }

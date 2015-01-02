@@ -123,6 +123,10 @@ filetype plugin indent on     " required
 "filetype plugin indent on "Enable filetype plugins
 syntax enable
 syntax on
+set encoding=utf-8
+set fenc=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set nobomb
 "set background=dark
 "colorscheme Tomorrow
 "colorscheme solarized

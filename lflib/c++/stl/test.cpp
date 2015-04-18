@@ -1,8 +1,10 @@
 #include <iostream>
 #include <map>
+#include <set>
+#include <vector>
 using namespace std;
 
-int main()
+void stl_test1()
 {
     map<unsigned, unsigned> list;
 
@@ -35,6 +37,38 @@ int main()
     if(it != list.end()){
         cout << "end3" << endl;
     }
+}
 
+void test_set_difference()
+{
+    set<unsigned> list1;
+    list1.insert(1);
+    list1.insert(2);
+    list1.insert(3);
+
+    set<unsigned> list2;
+    list2.insert(3);
+    list2.insert(4);
+    list2.insert(5);
+    list2.insert(6);
+    list2.insert(7);
+
+    set<unsigned> result;
+    set<unsigned>::iterator iter;    
+
+    std::set_difference(
+            list1.begin(), list1.end(),
+            list2.begin(), list2.end(),
+            inserter(result, result.begin())
+            );
+
+    for(iter = result.begin(); iter != result.end(); iter++){
+        cout << *iter << endl; 
+    }
+}
+
+int main()
+{
+    test_set_difference();
     return 0;
 }

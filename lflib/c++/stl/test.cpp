@@ -67,8 +67,24 @@ void test_set_difference()
     }
 }
 
+void test_reverse_iterator()
+{
+    map<unsigned, unsigned> numlist;
+    numlist.insert(make_pair(1, 10000));
+    numlist.insert(make_pair(2, 20000));
+    numlist.insert(make_pair(3, 30000));
+    numlist.insert(make_pair(4, 40000));
+
+    //不能这样使用
+    map<unsigned, unsigned>::reverse_iterator iter =  numlist.find(3);
+    for(; iter != numlist.rend(); iter++){
+        cout << iter->second << endl;
+    }
+}
+
 int main()
 {
-    test_set_difference();
+    //test_set_difference();
+    test_reverse_iterator();
     return 0;
 }
